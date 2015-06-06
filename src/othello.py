@@ -40,11 +40,124 @@ class Othello:
         self._size = size
         self._mat = [[UNDEF for i in range(size[1])] for j in range(size[0])]
 
-        self._mat[size[0]//2 - 1][size[1]//2 - 1] = WHITE
-        self._mat[size[0]//2 - 1][size[1]//2] = BLACK
-        self._mat[size[0]//2][size[1]//2 - 1] = BLACK
-        self._mat[size[0]//2][size[1]//2] = WHITE
+        self._mat[size[1]//2 - 1][size[0]//2 - 1] = WHITE
+        self._mat[size[1]//2 - 1][size[0]//2] = BLACK
+        self._mat[size[1]//2][size[0]//2 - 1] = BLACK
+        self._mat[size[1]//2][size[0]//2] = WHITE
 
     @property
     def mat(self):
         return self._mat
+
+    @property
+    def size(self):
+        return self._size
+
+    def puttable(self, ind, color):
+        mat = self.mat
+        i, j = ind
+
+        if self.mat[i][j] != UNDEF:
+            return False
+
+        j += 1
+        while j < self.size[0]:
+            if j == ind[1] + 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                return True
+            j += 1
+        j = ind[1]
+
+        j -= 1
+        while j >= 0:
+            if j == ind[1] - 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                return True
+            j -= 1
+        j = ind[1]
+
+        i += 1
+        while i < self.size[1]:
+            if i == ind[0] + 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                return True
+            i += 1
+        i = ind[0]
+
+        i -= 1
+        while i >= 0:
+            if i == ind[0] - 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                return True
+            i -= 1
+        i = ind[0]
+
+        i += 1
+        j += 1
+        while i < self.size[0] and j < self.size[1]:
+            if i == ind[0] + 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                return True
+            i += 1
+            j += 1
+        i = ind[0]
+        j = ind[1]
+
+        i += 1
+        j -= 1
+        while i < self.size[0] and j >= 0:
+            if i == ind[0] + 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                return True
+            i += 1
+            j -= 1
+        i = ind[0]
+        j = ind[1]
+
+        i -= 1
+        j += 1
+        while i >= 0 and j < self.size[1]:
+            if i == ind[0] - 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                return True
+            i -= 1
+            j += 1
+        i = ind[0]
+        j = ind[1]
+
+        i -= 1
+        j -= 1
+        while i >= 0 and j >= 0:
+            if i == ind[0] - 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                return True
+            i -= 1
+            j -= 1
+        i = ind[0]
+        j = ind[1]
+
+        return False

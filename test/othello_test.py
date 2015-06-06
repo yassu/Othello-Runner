@@ -82,7 +82,7 @@ class OthelloTestCase(TestCase):
 
     def puttable_test5(self):
         assert(self.othello.puttable((5, 3), WHITE) is True)
-        assert(self.othello.puttable((5, 3), BLACK) is True)
+        assert(self.othello.puttable((5, 3), BLACK) is False)
 
     def puttable_test6(self):
         self.othello._mat[3][3] = BLACK
