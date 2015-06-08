@@ -115,8 +115,8 @@ class OthelloTestCase(TestCase):
 
     def put_test3(self):
         self.othello.put((3, 5), WHITE)
-        assert(self.othello.mat[3][4] == WHITE)
-        assert(self.othello.mat[3][5] == WHITE)
+        assert(self.othello[3][4] == WHITE)
+        assert(self.othello[3][5] == WHITE)
 
     def put_test4(self):
         self.othello.put((2, 3), BLACK)
