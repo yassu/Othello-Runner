@@ -53,6 +53,9 @@ class Othello:
     def size(self):
         return self._size
 
+    def filled(self):
+        return not (UNDEF in [cell for row in self.mat for cell in row])
+
     def count(self, color):
         return [cell for row in self.mat for cell in row].count(color)
 

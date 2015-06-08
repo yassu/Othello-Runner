@@ -89,6 +89,15 @@ class OthelloTestCase(TestCase):
         assert(self.othello[3][2] == UNDEF)
         assert(self.othello[3][5] == UNDEF)
 
+    def filled_test(self):
+        assert(self.othello.filled() is False)
+
+    def filled_test2(self):
+        for i in range(8):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+        assert(self.othello.filled() is True)
+
     def count_test(self):
         assert(self.othello.count(WHITE) == 2)
         assert(self.othello.count(BLACK) == 2)
