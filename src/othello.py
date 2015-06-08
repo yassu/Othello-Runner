@@ -299,6 +299,9 @@ class Othello:
             i -= 1
             j -= 1
 
+    def finished(self):
+        return not self.puttable_somewhere(BLACK) and not self.puttable_somewhere(WHITE)
+
     def __str__(self):
         s = ""
         for row in self.mat:

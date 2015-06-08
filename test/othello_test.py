@@ -220,6 +220,13 @@ class OthelloTestCase(TestCase):
         assert(self.othello[5][5] == WHITE)
         assert(self.othello[4][4] == WHITE)
 
+    def finished_test(self):
+        othello = Othello()
+        for i in range(8):
+            for j in range(6):
+                othello._mat[i][j] = BLACK
+        assert(othello.finished() is True)
+
     def str_test(self):
         assert(str(self.othello) == (
                 "........\n"
