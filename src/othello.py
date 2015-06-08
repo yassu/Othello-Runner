@@ -161,3 +161,128 @@ class Othello:
         j = ind[1]
 
         return False
+
+    def put(self, ind, color):
+        if not self.puttable(ind, color):
+            raise ValueError("Can't at ({}, [}.)".format(ind[0], ind[1]))
+
+        mat = self.mat
+        i, j = ind
+
+        j += 1
+        while j < self.size[0]:
+            if j == ind[1] + 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                for l in range(ind[1], j + 1):
+                    mat[i][l] = color
+            j += 1
+        j = ind[1]
+
+        j -= 1
+        while j >= 0:
+            if j == ind[1] - 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                for l in range(j, ind[1] + 1):
+                    mat[i][l] = color
+            j -= 1
+        j = ind[1]
+
+        i += 1
+        while i < self.size[1]:
+            if i == ind[0] + 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                for k in range(ind[0], i + 1):
+                    mat[k][j] = color
+            i += 1
+        i = ind[0]
+
+        i -= 1
+        while i >= 0:
+            if i == ind[0] - 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                for k in range(i, ind[0] + 1):
+                    mat[k][j] = color
+            i -= 1
+        i = ind[0]
+
+        i += 1
+        j += 1
+        while i < self.size[0] and j < self.size[1]:
+            if i == ind[0] + 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                for k in range(i - ind[0] + 1):
+                    mat[ind[0] + k][ind[1] + k] = color
+            i += 1
+            j += 1
+        i = ind[0]
+        j = ind[1]
+
+        i += 1
+        j -= 1
+        while i < self.size[0] and j >= 0:
+            if i == ind[0] + 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                for k in range(i - ind[0] + 1):
+                    mat[ind[0] + k][ind[1] - k] = color
+            i += 1
+            j -= 1
+        i = ind[0]
+        j = ind[1]
+
+        i -= 1
+        j += 1
+        while i >= 0 and j < self.size[1]:
+            if i == ind[0] - 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                for k in range(j - ind[1] + 1):
+                    mat[ind[0] - k][ind[1] + k] = color
+            i -= 1
+            j += 1
+        i, j = ind
+
+        i -= 1
+        j -= 1
+        cnt = 0
+        while i >= 0 and j >= 0:
+            cnt += 1
+            if i == ind[0] - 1 and mat[i][j] == color:
+                break
+            elif mat[i][j] == UNDEF:
+                break
+            elif mat[i][j] == color:
+                for k in range(cnt + 1):
+                    mat[ind[0] - k][ind[1] - k] = color
+            i -= 1
+            j -= 1
+
+    def __str__(self):
+        s = ""
+        for row in self.mat:
+            for c in row:
+                s += str(c)
+            s += "\n"
+        return s
+
+    def __getitem__(self, ind):
+        return self.mat[ind]

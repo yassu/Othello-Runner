@@ -4,6 +4,7 @@ path.append('src')
 from othello import BlackCell, WhiteCell, UndefCell, Othello, WHITE, BLACK, UNDEF
 
 from unittest import TestCase
+from nose.tools import raises
 
 class BlackCellTestCase(TestCase):
     def setUp(self):
@@ -55,14 +56,14 @@ class OthelloTestCase(TestCase):
         self.othello = Othello()
 
     def init_test(self):
-        assert(self.othello.mat[3][3] == WHITE)
-        assert(self.othello.mat[3][4] == BLACK)
-        assert(self.othello.mat[4][3] == BLACK)
-        assert(self.othello.mat[4][4] == WHITE)
-        assert(self.othello.mat[2][3] == UNDEF)
-        assert(self.othello.mat[5][3] == UNDEF)
-        assert(self.othello.mat[3][2] == UNDEF)
-        assert(self.othello.mat[3][5] == UNDEF)
+        assert(self.othello[3][3] == WHITE)
+        assert(self.othello[3][4] == BLACK)
+        assert(self.othello[4][3] == BLACK)
+        assert(self.othello[4][4] == WHITE)
+        assert(self.othello[2][3] == UNDEF)
+        assert(self.othello[5][3] == UNDEF)
+        assert(self.othello[3][2] == UNDEF)
+        assert(self.othello[3][5] == UNDEF)
 
     def puttable_test(self):
         assert(self.othello.puttable((3, 3), WHITE) is False)
@@ -87,7 +88,6 @@ class OthelloTestCase(TestCase):
     def puttable_test6(self):
         self.othello._mat[3][3] = BLACK
         assert(self.othello.puttable((2, 2), WHITE) is True)
-        self.othello._mat[3][3] = WHITE
 
     def puttable_test7(self):
         self.othello._mat[3][4] = WHITE
@@ -103,3 +103,62 @@ class OthelloTestCase(TestCase):
         self.othello._mat[4][4] = BLACK
         assert(self.othello.puttable((5, 5), WHITE) is True)
         self.othello._mat[4][4] = WHITE
+
+    @raises(ValueError)
+    def put_test(self):
+        self.othello.put((0, 0), BLACK)
+
+    def put_test2(self):
+        self.othello.put((3, 2), BLACK)
+        assert(self.othello[3][3] == BLACK)
+        assert(self.othello[3][2] == BLACK)
+
+    def put_test3(self):
+        self.othello.put((3, 5), WHITE)
+        assert(self.othello.mat[3][4] == WHITE)
+        assert(self.othello.mat[3][5] == WHITE)
+
+    def put_test4(self):
+        self.othello.put((2, 3), BLACK)
+        assert(self.othello[2][3] == BLACK)
+        assert(self.othello[3][3] == BLACK)
+
+    def put_test5(self):
+        self.othello.put((5, 3), WHITE)
+        assert(self.othello[5][3] == WHITE)
+        assert(self.othello[4][3] == WHITE)
+
+    def put_test6(self):
+        self.othello.put((2, 3), BLACK)
+        self.othello.put((2, 2), WHITE)
+        assert(self.othello[3][3] == WHITE)
+
+    def put_test7(self):
+        self.othello.put((2, 4), WHITE)
+        self.othello.put((2, 5), BLACK)
+        assert(self.othello[2][5] == BLACK)
+        assert(self.othello[3][4] == BLACK)
+
+    def put_test8(self):
+        self.othello.put((5, 3), WHITE)
+        self.othello.put((5, 2), BLACK)
+        assert(self.othello[5][2] == BLACK)
+        assert(self.othello[4][3] == BLACK)
+
+    def put_test9(self):
+        self.othello.put((5, 4), BLACK)
+        self.othello.put((5, 5), WHITE)
+        assert(self.othello[5][5] == WHITE)
+        assert(self.othello[4][4] == WHITE)
+
+    def str_test(self):
+        assert(str(self.othello) == (
+                "........\n"
+                "........\n"
+                "........\n"
+                "...WB...\n"
+                "...BW...\n"
+                "........\n"
+                "........\n"
+                "........\n"
+            ))
