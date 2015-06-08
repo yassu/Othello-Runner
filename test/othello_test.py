@@ -5,7 +5,8 @@ from othello import (
         OthelloCell, BlackCell, WhiteCell, UndefCell,
         WHITE, BLACK, UNDEF,
         Othello,
-        Player)
+        Player,
+        s_ind_to_ind)
 
 from unittest import TestCase
 from nose.tools import raises
@@ -353,3 +354,15 @@ class PlayerTestCase(TestCase):
                 self.othello._mat[i][j] = WHITE
         self.othello._mat[3][3] = WHITE
         assert(self.player.lost() is True)
+
+
+def s_ind_to_ind_test():
+    assert(s_ind_to_ind('  1 ,  3 ') == (1, 3))
+
+@raises(ValueError)
+def s_ind_to_ind_test2():
+    s_ind_to_ind('ab, def')
+
+@raises(ValueError)
+def s_ind_to_ind_test3():
+    s_ind_to_ind('abcdef')

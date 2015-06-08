@@ -1,3 +1,5 @@
+from random import shuffle as random_shuffle
+
 class OthelloCell:
     def __init__(self, color):
         self._color = color
@@ -178,7 +180,7 @@ class Othello:
 
     def put(self, ind, color):
         if not self.puttable(ind, color):
-            raise ValueError("Can't at ({}, [}.)".format(ind[0], ind[1]))
+            raise ValueError("Can't at ({}, {}.)".format(ind[0], ind[1]))
 
         mat = self.mat
         i, j = ind
@@ -336,3 +338,44 @@ class Player:
         return othello.filled() and \
                 othello.count(self.color) < round(othello.size[0]*othello.size[1]//2)
 
+def s_ind_to_ind(s_ind):
+    s_ind = s_ind.replace(' ', '')
+    first, second = s_ind.split(',')
+    return int(first), int(second)
+
+class CuiRunner:
+    def main(self):
+        ary = ['BLACK', 'WHITE']
+        s_color_to_color = {'BLACK': BLACK, 'WHITE': WHITE}
+        random_shuffle(ary)
+        color1, color2 = ary
+        print('Your color is {}.'.format(color1))
+
+        color1 = s_color_to_color[color1]
+        color2 = s_color_to_color[color2]
+        othello = Othello()
+        usr = Player(othello, color1)
+        enemy = Player(othello, color2)
+
+        while not othello.filled():
+            print(othello)
+            print('usr input:')
+            ind = s_ind_to_ind(raw_input())
+            usr.put(ind)
+
+            print(othello)
+            print('enemy input:')
+            ind2 = s_ind_to_ind(raw_input())
+            enemy.put(ind2)
+
+        if usr.win():
+            print('You Win.')
+        elif usr.draw():
+            print('Draw.')
+        else:
+            print('You Lose.')
+
+
+
+if __name__ == '__main__':
+    CuiRunner().main()
