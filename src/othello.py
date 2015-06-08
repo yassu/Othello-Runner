@@ -331,20 +331,18 @@ class Player:
 
     def win(self):
         othello = self.othello
-        print(othello.puttable_somewhere(self.color))
-        print(othello)
         return not othello.puttable_somewhere(self.color) and \
                 othello.count(self.color) > round(othello.size[0]*othello.size[1]//2)
 
     def draw(self):
         othello = self.othello
-        return othello.filled() and \
+        return not othello.puttable_somewhere(self.color) and \
                 othello.count(self.color) == round(
                         othello.size[0]*othello.size[1]//2)
 
     def lost(self):
         othello = self.othello
-        return othello.filled() and \
+        return not othello.puttable_somewhere(self.color) and \
                 othello.count(self.color) < round(othello.size[0]*othello.size[1]//2)
 
 def s_ind_to_ind(s_ind):

@@ -374,6 +374,12 @@ class PlayerTestCase(TestCase):
         self.othello._mat[3][3] = WHITE
         assert(self.player.lost() is True)
 
+    def lost_test5(self):
+        for i in range(8):
+            for j in range(7):
+                self.othello._mat[i][j] = WHITE
+        assert(self.player.lost() is True)
+
 
 def s_ind_to_ind_test():
     assert(s_ind_to_ind('  1 ,  3 ') == (1, 3))
