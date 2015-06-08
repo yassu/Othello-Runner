@@ -2,13 +2,33 @@
 from sys import path
 path.append('src')
 from othello import (
-        BlackCell, WhiteCell, UndefCell,
+        OthelloCell, BlackCell, WhiteCell, UndefCell,
         WHITE, BLACK, UNDEF,
         Othello,
         Player)
 
 from unittest import TestCase
 from nose.tools import raises
+
+class OthelloCellTestCase(TestCase):
+    def setUp(self):
+        self.cell = OthelloCell('Red')
+
+    def color_test(self):
+        assert(self.cell.color == 'red')
+
+    def str_test(self):
+        assert(str(self.cell) == 'R')
+
+    def repr_test(self):
+        assert(repr(self.cell) == 'Cell<red>')
+
+    def eq_test(self):
+        assert(self.cell == OthelloCell('RED'))
+
+    def eq_test2(self):
+        assert(self.cell != OthelloCell('ReBlack'))
+
 
 class BlackCellTestCase(TestCase):
     def setUp(self):

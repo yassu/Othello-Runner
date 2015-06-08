@@ -14,7 +14,7 @@ class OthelloCell:
 
     def __eq__(self, other):
         return self.__class__ == other.__class__ and \
-                self._color == other._color
+                self.color == other.color
 
 class BlackCell(OthelloCell):
     def __init__(self):
