@@ -8,6 +8,13 @@ class OthelloCell:
     def color(self):
         return self._color.lower()
 
+    @property
+    def other_color(self):
+        if self.color == 'white':
+            return BLACK
+        elif self.color == 'black':
+            return WHITE
+
     def __str__(self):
         return self._color[0].upper()
 
@@ -302,6 +309,9 @@ class Othello:
             s += "\n"
         return s
 
+    def finished(self):
+        return not self.puttable_somewhere(BLACK) and not self.puttable_somewhere(WHITE)
+
     def __str__(self):
         s = ""
         for row in self.mat:
@@ -329,23 +339,26 @@ class Player:
     def puttable(self, ind):
         return self._othello.puttable(ind, self.color)
 
+    def puttable_somewhere(self):
+        return self.othello.puttable_somewhere(self.color)
+
     def put(self, ind):
         self._othello.put(ind, self.color)
 
     def win(self):
         othello = self.othello
-        return othello.filled() and \
+        return othello.finished() and \
                 othello.count(self.color) > round(othello.size[0]*othello.size[1]//2)
 
     def draw(self):
         othello = self.othello
-        return othello.filled() and \
+        return othello.finished() and \
                 othello.count(self.color) == round(
                         othello.size[0]*othello.size[1]//2)
 
     def lost(self):
         othello = self.othello
-        return othello.filled() and \
+        return othello.finished() and \
                 othello.count(self.color) < round(othello.size[0]*othello.size[1]//2)
 
 def s_ind_to_ind(s_ind):
