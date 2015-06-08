@@ -292,6 +292,16 @@ class Othello:
             i -= 1
             j -= 1
 
+    def pritty_str(self):
+        s = "  "
+        s += ''.join(list(map(str, range(self.size[1])))) + "\n"
+        for i in range(self.size[0]):
+            s += "{} ".format(i)
+            s += ''.join(list(map(str, [self.mat[i][j] for j in
+                range(self.size[1])])))
+            s += "\n"
+        return s
+
     def __str__(self):
         s = ""
         for row in self.mat:

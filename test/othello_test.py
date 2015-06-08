@@ -212,6 +212,33 @@ class OthelloTestCase(TestCase):
         assert(self.othello[5][5] == WHITE)
         assert(self.othello[4][4] == WHITE)
 
+    def pritty_str_test(self):
+        assert(self.othello.pritty_str() == (
+                "  01234567\n"
+                "0 ........\n"
+                "1 ........\n"
+                "2 ........\n"
+                "3 ...WB...\n"
+                "4 ...BW...\n"
+                "5 ........\n"
+                "6 ........\n"
+                "7 ........\n"
+            ))
+
+    def pritty_str_test2(self):
+        self.othello.put((5, 4), BLACK)
+        assert(self.othello.pritty_str() == (
+                "  01234567\n"
+                "0 ........\n"
+                "1 ........\n"
+                "2 ........\n"
+                "3 ...WB...\n"
+                "4 ...BB...\n"
+                "5 ....B...\n"
+                "6 ........\n"
+                "7 ........\n"
+            ))
+
     def str_test(self):
         assert(str(self.othello) == (
                 "........\n"
