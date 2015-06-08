@@ -226,3 +226,111 @@ class PlayerTestCase(TestCase):
         self.player.put((3, 2))
         assert(self.othello[3][3] == BLACK)
         assert(self.othello[3][2] == BLACK)
+
+    def win_test(self):
+        assert(self.player.win() is False)
+
+    def win_test2(self):
+        for i in range(4):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+
+        for i in range(4, 8):
+            for j in range(8):
+                self.othello._mat[i][j] = WHITE
+        assert(self.player.win() is False)
+
+    def win_test3(self):
+        for i in range(4):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+
+        for i in range(4, 8):
+            for j in range(8):
+                self.othello._mat[i][j] = WHITE
+        self.othello._mat[7][7] = BLACK
+
+        assert(self.player.win() is True)
+
+    def win_test4(self):
+        for i in range(4):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+
+        for i in range(4, 8):
+            for j in range(8):
+                self.othello._mat[i][j] = WHITE
+        self.othello._mat[3][3] = WHITE
+        assert(self.player.win() is False)
+
+
+    def draw_test(self):
+        assert(self.player.draw() is False)
+
+    def draw_test2(self):
+        for i in range(4):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+
+        for i in range(4, 8):
+            for j in range(8):
+                self.othello._mat[i][j] = WHITE
+        assert(self.player.draw() is True)
+
+    def draw_test3(self):
+        for i in range(4):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+
+        for i in range(4, 8):
+            for j in range(8):
+                self.othello._mat[i][j] = WHITE
+        self.othello._mat[7][7] = BLACK
+
+        assert(self.player.draw() is False)
+
+    def draw_test4(self):
+        for i in range(4):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+
+        for i in range(4, 8):
+            for j in range(8):
+                self.othello._mat[i][j] = WHITE
+        self.othello._mat[3][3] = WHITE
+        assert(self.player.draw() is False)
+
+    def lost_test(self):
+        assert(self.player.lost() is False)
+
+    def lost_test2(self):
+        for i in range(4):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+
+        for i in range(4, 8):
+            for j in range(8):
+                self.othello._mat[i][j] = WHITE
+
+    def lost_test3(self):
+        for i in range(4):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+
+        for i in range(4, 8):
+            for j in range(8):
+                self.othello._mat[i][j] = WHITE
+        self.othello._mat[7][7] = BLACK
+
+        assert(self.player.lost() is False)
+
+    def lost_test4(self):
+        for i in range(4):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+
+        for i in range(4, 8):
+            for j in range(8):
+                self.othello._mat[i][j] = WHITE
+        self.othello._mat[3][3] = WHITE
+        assert(self.player.lost() is True)

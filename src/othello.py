@@ -311,3 +311,20 @@ class Player:
 
     def put(self, ind):
         self._othello.put(ind, self.color)
+
+    def win(self):
+        othello = self.othello
+        return othello.filled() and \
+                othello.count(self.color) > round(othello.size[0]*othello.size[1]//2)
+
+    def draw(self):
+        othello = self.othello
+        return othello.filled() and \
+                othello.count(self.color) == round(
+                        othello.size[0]*othello.size[1]//2)
+
+    def lost(self):
+        othello = self.othello
+        return othello.filled() and \
+                othello.count(self.color) < round(othello.size[0]*othello.size[1]//2)
+
