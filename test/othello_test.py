@@ -89,6 +89,14 @@ class OthelloTestCase(TestCase):
         assert(self.othello[3][2] == UNDEF)
         assert(self.othello[3][5] == UNDEF)
 
+    def count_test(self):
+        assert(self.othello.count(WHITE) == 2)
+        assert(self.othello.count(BLACK) == 2)
+
+    def count_test2(self):
+        self.othello.put((3, 2), BLACK)
+        assert(self.othello.count(BLACK) == 4)
+
     def puttable_test(self):
         assert(self.othello.puttable((3, 3), WHITE) is False)
 

@@ -53,6 +53,9 @@ class Othello:
     def size(self):
         return self._size
 
+    def count(self, color):
+        return [cell for row in self.mat for cell in row].count(color)
+
     def puttable(self, ind, color):
         mat = self.mat
         i, j = ind
