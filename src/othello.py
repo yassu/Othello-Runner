@@ -8,6 +8,13 @@ class OthelloCell:
     def color(self):
         return self._color.lower()
 
+    @property
+    def other_color(self):
+        if self.color == 'white':
+            return BLACK
+        elif self.color == 'black':
+            return WHITE
+
     def __str__(self):
         return self._color[0].upper()
 
@@ -324,7 +331,9 @@ class Player:
 
     def win(self):
         othello = self.othello
-        return othello.filled() and \
+        print(othello.puttable_somewhere(self.color))
+        print(othello)
+        return not othello.puttable_somewhere(self.color) and \
                 othello.count(self.color) > round(othello.size[0]*othello.size[1]//2)
 
     def draw(self):

@@ -24,6 +24,14 @@ class OthelloCellTestCase(TestCase):
     def repr_test(self):
         assert(repr(self.cell) == 'Cell<red>')
 
+    def other_color_test(self):
+        cell = OthelloCell('Black')
+        assert(cell.other_color == WHITE)
+
+    def other_color_test2(self):
+        cell = OthelloCell('White')
+        assert(cell.other_color == BLACK)
+
     def eq_test(self):
         assert(self.cell == OthelloCell('RED'))
 
@@ -212,20 +220,6 @@ class OthelloTestCase(TestCase):
         assert(self.othello[5][5] == WHITE)
         assert(self.othello[4][4] == WHITE)
 
-    def pritty_str_test(self):
-        assert(self.othello.pritty_str() ==
-                "  12345678\n"
-                "          \n"
-                "1 ........\n"
-                "2 ........\n"
-                "3 ........\n"
-                "4 ...WB...\n"
-                "5 ...BW...\n"
-                "6 ........\n"
-                "7 ........\n"
-                "8 ........\n"
-                )
-
     def str_test(self):
         assert(str(self.othello) == (
                 "........\n"
@@ -274,6 +268,7 @@ class PlayerTestCase(TestCase):
                 self.othello._mat[i][j] = WHITE
         assert(self.player.win() is False)
 
+
     def win_test3(self):
         for i in range(4):
             for j in range(8):
@@ -297,6 +292,16 @@ class PlayerTestCase(TestCase):
         self.othello._mat[3][3] = WHITE
         assert(self.player.win() is False)
 
+    def win_test5(self):
+        for i in range(4):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+
+        for i in range(4, 8):
+            for j in range(7):
+                self.othello._mat[i][j] = BLACK
+
+        assert(self.player.win() is True)
 
     def draw_test(self):
         assert(self.player.draw() is False)
