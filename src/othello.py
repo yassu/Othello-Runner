@@ -286,3 +286,22 @@ class Othello:
 
     def __getitem__(self, ind):
         return self.mat[ind]
+
+class Player:
+    def __init__(self, othello, color):
+        self._othello = othello
+        self._color = color
+
+    @property
+    def color(self):
+        return self._color
+
+    @property
+    def othello(self):
+        return self._othello
+
+    def puttable(self, ind):
+        return self._othello.puttable(ind, self.color)
+
+    def put(self, ind):
+        self._othello.put(ind, self.color)

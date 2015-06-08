@@ -1,7 +1,11 @@
 # from nose.tools import raises
 from sys import path
 path.append('src')
-from othello import BlackCell, WhiteCell, UndefCell, Othello, WHITE, BLACK, UNDEF
+from othello import (
+        BlackCell, WhiteCell, UndefCell,
+        WHITE, BLACK, UNDEF,
+        Othello,
+        Player)
 
 from unittest import TestCase
 from nose.tools import raises
@@ -162,3 +166,26 @@ class OthelloTestCase(TestCase):
                 "........\n"
                 "........\n"
             ))
+
+class PlayerTestCase(TestCase):
+    def setUp(self):
+        self.othello = Othello()
+        self.player = Player(self.othello, BLACK)
+
+    def color_test(self):
+        assert(self.player.color == BLACK)
+
+    def othello_test(self):
+        self.player.othello == self.othello
+
+    def puttable_test(self):
+        assert(self.player.puttable((2, 3)) is True)
+
+    @raises(ValueError)
+    def put_test(self):
+        self.player.put((0, 0))
+
+    def put_test2(self):
+        self.player.put((3, 2))
+        assert(self.othello[3][3] == BLACK)
+        assert(self.othello[3][2] == BLACK)
