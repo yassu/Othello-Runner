@@ -145,6 +145,25 @@ class OthelloTestCase(TestCase):
         assert(self.othello.puttable((5, 5), WHITE) is True)
         self.othello._mat[4][4] = WHITE
 
+    def puttable_somewhere_test(self):
+        assert(self.othello.puttable_somewhere(WHITE) == True)
+
+    def puttable_somewhere_test2(self):
+        for i in range(8):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+        assert(self.othello.puttable_somewhere(BLACK) is False)
+        assert(self.othello.puttable_somewhere(WHITE) is False)
+
+    def puttable_somewhere_test3(self):
+        for i in range(8):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+        self.othello._mat[0][0] = UNDEF
+        self.othello._mat[0][3] = WHITE
+        assert(self.othello.puttable_somewhere(BLACK) is False)
+        assert(self.othello.puttable_somewhere(WHITE) is True)
+
     @raises(ValueError)
     def put_test(self):
         self.othello.put((0, 0), BLACK)

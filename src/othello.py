@@ -168,6 +168,14 @@ class Othello:
 
         return False
 
+    def puttable_somewhere(self, color):
+        for i in range(self.size[0]):
+            for j in range(self.size[1]):
+                if self.puttable((i, j), color):
+                    return True
+
+        return False
+
     def put(self, ind, color):
         if not self.puttable(ind, color):
             raise ValueError("Can't at ({}, [}.)".format(ind[0], ind[1]))
