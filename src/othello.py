@@ -324,9 +324,14 @@ class Othello:
         return self.mat[ind]
 
 class Player:
-    def __init__(self, othello, color):
+    def __init__(self, name, othello, color):
+        self._name = name
         self._othello = othello
         self._color = color
+
+    @property
+    def name(self):
+        return self._name
 
     @property
     def color(self):
@@ -335,6 +340,11 @@ class Player:
     @property
     def othello(self):
         return self._othello
+
+    def get_next_move(self, in_=raw_input):
+        print('{} input:'.format(self.name))
+        ind = s_ind_to_ind(in_())
+        return ind
 
     def puttable(self, ind):
         return self._othello.puttable(ind, self.color)
@@ -377,18 +387,16 @@ class CuiRunner:
         color1 = s_color_to_color[color1]
         color2 = s_color_to_color[color2]
         othello = Othello()
-        usr = Player(othello, color1)
-        enemy = Player(othello, color2)
+        usr = Player('user', othello, color1)
+        enemy = Player('enemy', othello, color2)
 
         while not othello.filled():
             print(othello)
-            print('usr input:')
-            ind = s_ind_to_ind(raw_input())
+            ind = usr.get_next_move()
             usr.put(ind)
 
             print(othello)
-            print('enemy input:')
-            ind2 = s_ind_to_ind(raw_input())
+            ind2 = enemy.get_next_move()
             enemy.put(ind2)
 
         if usr.win():

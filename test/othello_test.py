@@ -1,4 +1,3 @@
-# from nose.tools import raises
 from sys import path
 path.append('src')
 from othello import (
@@ -268,13 +267,24 @@ class OthelloTestCase(TestCase):
 class PlayerTestCase(TestCase):
     def setUp(self):
         self.othello = Othello()
-        self.player = Player(self.othello, BLACK)
+        self.player = Player('user', self.othello, BLACK)
 
     def color_test(self):
         assert(self.player.color == BLACK)
 
     def othello_test(self):
         self.player.othello == self.othello
+
+    def get_next_move_test(self):
+        assert(self.player.get_next_move(in_=lambda: '1, 2') == (1, 2))
+
+    @raises(ValueError)
+    def get_next_move_test2(self):
+        self.player.get_next_move(in_=lambda: 'ab, def')
+
+    @raises(ValueError)
+    def get_next_move_test3(self):
+        self.player.get_next_move(in_=lambda: 'abcdef')
 
     def puttable_test(self):
         assert(self.player.puttable((2, 3)) is True)
