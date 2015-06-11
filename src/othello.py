@@ -387,21 +387,28 @@ class CuiRunner:
         color1 = s_color_to_color[color1]
         color2 = s_color_to_color[color2]
         othello = Othello()
-        usr = Player('user', othello, color1)
-        enemy = Player('enemy', othello, color2)
+
+        if color1 == BLACK:
+            first_player = Player('user', othello, color1)
+            user = first_player
+            second_player = Player('enemy', othello, color2)
+        else:
+            first_player = Player('enemy', othello, color2)
+            second_player = Player('user', othello, color1)
+            user = second_player
 
         while not othello.filled():
             print(othello)
-            ind = usr.get_next_move()
-            usr.put(ind)
+            ind = first_player.get_next_move()
+            first_player.put(ind)
 
             print(othello)
-            ind2 = enemy.get_next_move()
-            enemy.put(ind2)
+            ind2 = second_player.get_next_move()
+            second_player.put(ind2)
 
-        if usr.win():
+        if user.win():
             print('You Win.')
-        elif usr.draw():
+        elif user.draw():
             print('Draw.')
         else:
             print('You Lose.')
