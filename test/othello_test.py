@@ -3,7 +3,7 @@ path.append('src')
 from othello import (
         OthelloCell, BlackCell, WhiteCell, UndefCell,
         WHITE, BLACK, UNDEF,
-        Othello,
+        Othello, OthelloIter,
         Player,
         s_ind_to_ind)
 
@@ -263,6 +263,23 @@ class OthelloTestCase(TestCase):
                 "........\n"
                 "........\n"
             ))
+
+class OthelloIterTestCase(TestCase):
+    @raises(StopIteration)
+    def iter_test(self):
+        data = OthelloIter([
+            ((3, 2), BLACK),
+            ((2, 2), WHITE)
+            ])
+        othello = Othello()
+
+        othello.put((3, 2), BLACK)
+        assert(next(data) == othello)
+
+        othello.put((2, 2), WHITE)
+        assert(next(data) == othello)
+
+        next(data)
 
 class PlayerTestCase(TestCase):
     def setUp(self):

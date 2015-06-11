@@ -1,4 +1,5 @@
 from random import shuffle as random_shuffle
+from copy import deepcopy
 
 class OthelloCell:
     def __init__(self, color):
@@ -320,8 +321,33 @@ class Othello:
             s += "\n"
         return s
 
+    def __eq__(self, other):
+        return self.mat == other.mat
+
     def __getitem__(self, ind):
         return self.mat[ind]
+
+class OthelloIter:
+    def __init__(self, othello_data):
+        self._data = deepcopy(othello_data)
+        self._othello = Othello()
+
+    @property
+    def data(self):
+        return self._data
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        if len(self._data) == 0:
+            raise StopIteration()
+
+        ind, color = self._data[0]
+        del(self._data[0])
+        self._othello.put(ind, color)
+        return self._othello
+
 
 class Player:
     def __init__(self, name, othello, color):
