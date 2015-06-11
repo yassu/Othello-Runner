@@ -389,9 +389,9 @@ class CuiRunner:
         othello = Othello()
 
         if color1 == BLACK:
-            first_player = Player('user', othello, color1)
+            first_player = Player('player1', othello, color1)
             user = first_player
-            second_player = Player('enemy', othello, color2)
+            second_player = Player('player2', othello, color2)
         else:
             first_player = Player('enemy', othello, color2)
             second_player = Player('user', othello, color1)
