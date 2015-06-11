@@ -1,16 +1,18 @@
 from sys import path
 path.append('src')
 from othello import (
-        OthelloCell, BlackCell, WhiteCell, UndefCell,
-        WHITE, BLACK, UNDEF,
-        Othello, OthelloIter,
-        Player,
-        s_ind_to_ind)
+    OthelloCell, BlackCell, WhiteCell, UndefCell,
+    WHITE, BLACK, UNDEF,
+    Othello, OthelloIter,
+    Player,
+    s_ind_to_ind)
 
 from unittest import TestCase
 from nose.tools import raises
 
+
 class OthelloCellTestCase(TestCase):
+
     def setUp(self):
         self.cell = OthelloCell('Red')
 
@@ -39,6 +41,7 @@ class OthelloCellTestCase(TestCase):
 
 
 class BlackCellTestCase(TestCase):
+
     def setUp(self):
         self.black_cell = BlackCell()
 
@@ -53,7 +56,9 @@ class BlackCellTestCase(TestCase):
         assert(self.black_cell != WhiteCell())
         assert(self.black_cell != UndefCell())
 
+
 class WhiteCellTestCase(TestCase):
+
     def setUp(self):
         self.white_cell = WhiteCell()
 
@@ -68,7 +73,9 @@ class WhiteCellTestCase(TestCase):
         assert(self.white_cell == WhiteCell())
         assert(self.white_cell != UndefCell())
 
+
 class UndefCellTestCase(TestCase):
+
     def setUp(self):
         self.undef_cell = UndefCell()
 
@@ -83,7 +90,9 @@ class UndefCellTestCase(TestCase):
         assert(self.undef_cell != WhiteCell())
         assert(self.undef_cell == UndefCell())
 
+
 class OthelloTestCase(TestCase):
+
     def setUp(self):
         self.othello = Othello()
 
@@ -120,7 +129,6 @@ class OthelloTestCase(TestCase):
     def puttable_test2(self):
         assert(self.othello.puttable((3, 2), BLACK) is True)
         assert(self.othello.puttable((3, 2), WHITE) is False)
-
 
     def puttable_test3(self):
         assert(self.othello.puttable((3, 5), WHITE) is True)
@@ -221,30 +229,31 @@ class OthelloTestCase(TestCase):
 
     def pritty_str_test(self):
         assert(self.othello.pritty_str() == (
-                "  01234567\n"
-                "0 ........\n"
-                "1 ........\n"
-                "2 ........\n"
-                "3 ...WB...\n"
-                "4 ...BW...\n"
-                "5 ........\n"
-                "6 ........\n"
-                "7 ........\n"
-            ))
+            "  01234567\n"
+            "0 ........\n"
+            "1 ........\n"
+            "2 ........\n"
+            "3 ...WB...\n"
+            "4 ...BW...\n"
+            "5 ........\n"
+            "6 ........\n"
+            "7 ........\n"
+        ))
 
     def pritty_str_test2(self):
         self.othello.put((5, 4), BLACK)
         assert(self.othello.pritty_str() == (
-                "  01234567\n"
-                "0 ........\n"
-                "1 ........\n"
-                "2 ........\n"
-                "3 ...WB...\n"
-                "4 ...BB...\n"
-                "5 ....B...\n"
-                "6 ........\n"
-                "7 ........\n"
-            ))
+            "  01234567\n"
+            "0 ........\n"
+            "1 ........\n"
+            "2 ........\n"
+            "3 ...WB...\n"
+            "4 ...BB...\n"
+            "5 ....B...\n"
+            "6 ........\n"
+            "7 ........\n"
+        ))
+
     def finished_test(self):
         othello = Othello()
         for i in range(8):
@@ -254,23 +263,25 @@ class OthelloTestCase(TestCase):
 
     def str_test(self):
         assert(str(self.othello) == (
-                "........\n"
-                "........\n"
-                "........\n"
-                "...WB...\n"
-                "...BW...\n"
-                "........\n"
-                "........\n"
-                "........\n"
-            ))
+            "........\n"
+            "........\n"
+            "........\n"
+            "...WB...\n"
+            "...BW...\n"
+            "........\n"
+            "........\n"
+            "........\n"
+        ))
+
 
 class OthelloIterTestCase(TestCase):
+
     @raises(StopIteration)
     def iter_test(self):
         data = OthelloIter([
             ((3, 2), BLACK),
             ((2, 2), WHITE)
-            ])
+        ])
         othello = Othello()
 
         othello.put((3, 2), BLACK)
@@ -281,7 +292,9 @@ class OthelloIterTestCase(TestCase):
 
         next(data)
 
+
 class PlayerTestCase(TestCase):
+
     def setUp(self):
         self.othello = Othello()
         self.player = Player('user', self.othello, BLACK)
@@ -327,7 +340,6 @@ class PlayerTestCase(TestCase):
             for j in range(8):
                 self.othello._mat[i][j] = WHITE
         assert(self.player.win() is False)
-
 
     def win_test3(self):
         for i in range(4):
@@ -444,9 +456,11 @@ class PlayerTestCase(TestCase):
 def s_ind_to_ind_test():
     assert(s_ind_to_ind('  1 ,  3 ') == (1, 3))
 
+
 @raises(ValueError)
 def s_ind_to_ind_test2():
     s_ind_to_ind('ab, def')
+
 
 @raises(ValueError)
 def s_ind_to_ind_test3():

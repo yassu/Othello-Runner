@@ -1,7 +1,9 @@
 from random import shuffle as random_shuffle
 from copy import deepcopy
 
+
 class OthelloCell:
+
     def __init__(self, color):
         self._color = color
 
@@ -24,17 +26,23 @@ class OthelloCell:
 
     def __eq__(self, other):
         return self.__class__ == other.__class__ and \
-                self.color == other.color
+            self.color == other.color
+
 
 class BlackCell(OthelloCell):
+
     def __init__(self):
         OthelloCell.__init__(self, 'Black')
 
+
 class WhiteCell(OthelloCell):
+
     def __init__(self):
         OthelloCell.__init__(self, 'White')
 
+
 class UndefCell(OthelloCell):
+
     def __init__(self):
         OthelloCell.__init__(self, 'Undef')
 
@@ -45,15 +53,17 @@ BLACK = BlackCell()
 WHITE = WhiteCell()
 UNDEF = UndefCell()
 
+
 class Othello:
+
     def __init__(self, size=(8, 8)):
         self._size = size
         self._mat = [[UNDEF for i in range(size[1])] for j in range(size[0])]
 
-        self._mat[size[1]//2 - 1][size[0]//2 - 1] = WHITE
-        self._mat[size[1]//2 - 1][size[0]//2] = BLACK
-        self._mat[size[1]//2][size[0]//2 - 1] = BLACK
-        self._mat[size[1]//2][size[0]//2] = WHITE
+        self._mat[size[1] // 2 - 1][size[0] // 2 - 1] = WHITE
+        self._mat[size[1] // 2 - 1][size[0] // 2] = BLACK
+        self._mat[size[1] // 2][size[0] // 2 - 1] = BLACK
+        self._mat[size[1] // 2][size[0] // 2] = WHITE
 
     @property
     def mat(self):
@@ -306,12 +316,13 @@ class Othello:
         for i in range(self.size[0]):
             s += "{} ".format(i)
             s += ''.join(list(map(str, [self.mat[i][j] for j in
-                range(self.size[1])])))
+                                        range(self.size[1])])))
             s += "\n"
         return s
 
     def finished(self):
-        return not self.puttable_somewhere(BLACK) and not self.puttable_somewhere(WHITE)
+        return not self.puttable_somewhere(BLACK) and \
+            not self.puttable_somewhere(WHITE)
 
     def __str__(self):
         s = ""
@@ -327,7 +338,9 @@ class Othello:
     def __getitem__(self, ind):
         return self.mat[ind]
 
+
 class OthelloIter:
+
     def __init__(self, othello_data):
         self._data = deepcopy(othello_data)
         self._othello = Othello()
@@ -350,6 +363,7 @@ class OthelloIter:
 
 
 class Player:
+
     def __init__(self, name, othello, color):
         self._name = name
         self._othello = othello
@@ -384,25 +398,30 @@ class Player:
     def win(self):
         othello = self.othello
         return othello.finished() and \
-                othello.count(self.color) > round(othello.size[0]*othello.size[1]//2)
+            othello.count(self.color) > round(
+                othello.size[0] * othello.size[1] // 2)
 
     def draw(self):
         othello = self.othello
         return othello.finished() and \
-                othello.count(self.color) == round(
-                        othello.size[0]*othello.size[1]//2)
+            othello.count(self.color) == round(
+            othello.size[0] * othello.size[1] // 2)
 
     def lost(self):
         othello = self.othello
         return othello.finished() and \
-                othello.count(self.color) < round(othello.size[0]*othello.size[1]//2)
+            othello.count(self.color) < round(
+                othello.size[0] * othello.size[1] // 2)
+
 
 def s_ind_to_ind(s_ind):
     s_ind = s_ind.replace(' ', '')
     first, second = s_ind.split(',')
     return int(first), int(second)
 
+
 class CuiRunner:
+
     def main(self):
         ary = ['BLACK', 'WHITE']
         s_color_to_color = {'BLACK': BLACK, 'WHITE': WHITE}
