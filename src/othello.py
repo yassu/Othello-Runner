@@ -439,6 +439,9 @@ class CuiRunner:
         else:
             print('You Lose.')
 
+    def simulation(self, othello_iter):
+        for othello in othello_iter:
+            print(othello_iter)
 
 
 if __name__ == '__main__':
