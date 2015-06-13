@@ -3,6 +3,7 @@ from copy import deepcopy
 
 DEFAULT_OTHELLO_SIZE = (8, 8)
 
+
 class OthelloCell:
 
     def __init__(self, color):

@@ -3,7 +3,9 @@ from copy import deepcopy
 
 from othello import DEFAULT_OTHELLO_SIZE
 
+
 class OthelloBord(Frame):
+
     def __init__(self, master=None, size=DEFAULT_OTHELLO_SIZE):
         Frame.__init__(self, master)
 
@@ -12,10 +14,9 @@ class OthelloBord(Frame):
 
         self.init(master)
 
-
     def init(self, master=None):
         self._button_mat = [[0 for i in range(self.size[0])] for j in
-                range(self.size[1])]
+                            range(self.size[1])]
         for i in range(self.size[0]):
             for j in range(self.size[1]):
                 self._button_mat[i][j] = Button(self, background="lime green")
@@ -28,7 +29,9 @@ class OthelloBord(Frame):
     def size(self):
         return self._size
 
+
 class SideButtonBarFrame(Frame):
+
     def __init__(self, master=None):
         Frame.__init__(self, master)
 
