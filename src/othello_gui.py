@@ -44,7 +44,7 @@ class Field:
 
     @property
     def all_put_button(self):
-        return self._auto_put_button
+        return self._all_put_button
 
 class OthelloCellButton(Button):
     def __init__(self, master=None, **kw):
@@ -119,7 +119,6 @@ class OthelloBord(Frame):
         self._othello = Othello()
 
         self.init(master)
-        self.synchronized_with_othello()
 
     def init(self, master=None):
         self._button_mat = [[0 for i in range(self.size[0])] for j in
@@ -129,14 +128,12 @@ class OthelloBord(Frame):
                 self._button_mat[i][j] = OthelloCellButton(self, width=1,
                         height=1)
                 self._button_mat[i][j].grid(row=i, column=j)
+        self.synchronized_with_othello()
 
     def synchronized_with_othello(self):
         for i in range(self.size[0]):
             for j in range(self.size[1]):
                 self._button_mat[i][j].change_color(self._othello[i][j])
-
-    def put_event(self):
-        pass
 
     def set_field(self, field):
         self._field = field
