@@ -1,6 +1,7 @@
 from random import shuffle as random_shuffle
 from copy import deepcopy
 
+DEFAULT_OTHELLO_SIZE = (8, 8)
 
 class OthelloCell:
 
@@ -56,7 +57,7 @@ UNDEF = UndefCell()
 
 class Othello:
 
-    def __init__(self, size=(8, 8)):
+    def __init__(self, size=DEFAULT_OTHELLO_SIZE):
         self._size = size
         self._mat = [[UNDEF for i in range(size[1])] for j in range(size[0])]
 

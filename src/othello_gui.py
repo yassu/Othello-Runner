@@ -1,10 +1,10 @@
 from Tkinter import *
 from copy import deepcopy
 
-OTHELLO_SIZE = (8, 8)
+from othello import DEFAULT_OTHELLO_SIZE
 
 class OthelloBord(Frame):
-    def __init__(self, master=None, size=OTHELLO_SIZE):
+    def __init__(self, master=None, size=DEFAULT_OTHELLO_SIZE):
         Frame.__init__(self, master)
 
         self._size = size
