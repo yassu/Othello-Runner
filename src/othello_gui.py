@@ -1,9 +1,11 @@
 from Tkinter import *
 from copy import deepcopy
 
-from othello import DEFAULT_OTHELLO_SIZE, Othello, BLACK, WHITE, UNDEF
+from othello import DEFAULT_OTHELLO_SIZE, Othello, BLACK, UNDEF
+
 
 class Field:
+
     def set_othello_bord(self, bord):
         self._othello_bord = bord
 
@@ -39,7 +41,9 @@ class Field:
     def simulation_button(self):
         return self._simulation_button
 
+
 class OthelloCellButton(Button):
+
     def __init__(self, ind, master=None, **kw):
         if 'background' not in kw.keys():
             kw['background'] = 'lime green'
@@ -52,7 +56,6 @@ class OthelloCellButton(Button):
 
     def clicked_event(self):
         othello_bord = self._field.othello_bord
-        color = othello_bord.next_color
         othello_bord.put(self.ind)
 
     def set_field(self, field):
@@ -64,7 +67,9 @@ class OthelloCellButton(Button):
         else:
             self.configure(text=str(color))
 
+
 class StartButton(Button):
+
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
             kw['text'] = 'Start'
@@ -76,7 +81,9 @@ class StartButton(Button):
     def get_name(self):
         return 'Start'
 
+
 class ClearButton(Button):
+
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
             kw['text'] = 'Clear'
@@ -85,7 +92,9 @@ class ClearButton(Button):
     def set_field(self, field):
         self._field = field
 
+
 class LoadDataButton(Button):
+
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
             kw['text'] = 'Load Data'
@@ -94,7 +103,9 @@ class LoadDataButton(Button):
     def set_field(self, field):
         self._field = field
 
+
 class SimulationButton(Button):
+
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
             kw['text'] = 'Simulation'
@@ -122,9 +133,9 @@ class OthelloBord(Frame):
         for i in range(self.size[0]):
             for j in range(self.size[1]):
                 self._button_mat[i][j] = OthelloCellButton(
-                        (i, j),
-                        self,
-                        width=1, height=1)
+                    (i, j),
+                    self,
+                    width=1, height=1)
                 self._button_mat[i][j].grid(row=i, column=j)
         self.synchronized_with_othello()
 
