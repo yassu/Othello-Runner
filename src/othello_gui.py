@@ -47,10 +47,18 @@ class Field:
         return self._all_put_button
 
 class OthelloCellButton(Button):
-    def __init__(self, master=None, **kw):
+    def __init__(self, ind, master=None, **kw):
         if 'background' not in kw.keys():
             kw['background'] = 'lime green'
-        Button.__init__(self, master, kw)
+        Button.__init__(self, master, kw, command=self.clicked_event)
+        self._ind = ind
+
+    @property
+    def ind(self):
+        return self._ind
+
+    def clicked_event(self):
+        print('({}, {}) is clicked.'.format(self.ind[0], self.ind[1]))
 
     def set_field(self, field):
         self._field = field
@@ -125,8 +133,10 @@ class OthelloBord(Frame):
                             range(self.size[1])]
         for i in range(self.size[0]):
             for j in range(self.size[1]):
-                self._button_mat[i][j] = OthelloCellButton(self, width=1,
-                        height=1)
+                self._button_mat[i][j] = OthelloCellButton(
+                        (i, j),
+                        self,
+                        width=1, height=1)
                 self._button_mat[i][j].grid(row=i, column=j)
         self.synchronized_with_othello()
 
@@ -177,7 +187,12 @@ class SideButtonBarFrame(Frame):
 if __name__ == '__main__':
     root = Tk()
     root.title('Othello')
+    field = Field()
+
     bord = OthelloBord(root)
+    bord.set_field(field)
+    field.set_othello_bord(bord)
+
     side_frame = SideButtonBarFrame(root)
     bord.pack(side='left')
     side_frame.pack(side='left')
