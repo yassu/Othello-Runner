@@ -45,6 +45,9 @@ class BlackCellTestCase(TestCase):
     def setUp(self):
         self.black_cell = BlackCell()
 
+    def different_color_test(self):
+        assert(self.black_cell.different_color == WHITE)
+
     def str_test(self):
         assert(str(self.black_cell) == 'B')
 
@@ -61,6 +64,9 @@ class WhiteCellTestCase(TestCase):
 
     def setUp(self):
         self.white_cell = WhiteCell()
+
+    def different_color_test(self):
+        assert(self.white_cell.different_color == BLACK)
 
     def str_test(self):
         assert(str(self.white_cell) == 'W')

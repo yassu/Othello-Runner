@@ -36,11 +36,19 @@ class BlackCell(OthelloCell):
     def __init__(self):
         OthelloCell.__init__(self, 'Black')
 
+    @property
+    def different_color(self):
+        return WhiteCell()
+
 
 class WhiteCell(OthelloCell):
 
     def __init__(self):
         OthelloCell.__init__(self, 'White')
+
+    @property
+    def different_color(self):
+        return BlackCell()
 
 
 class UndefCell(OthelloCell):

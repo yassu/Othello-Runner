@@ -9,7 +9,7 @@ class Field:
 
     @property
     def othello_bord(self):
-        return self._othello_bord()
+        return self._othello_bord
 
     def set_start_button(self, b):
         self._start_button = b
@@ -51,7 +51,9 @@ class OthelloCellButton(Button):
         return self._ind
 
     def clicked_event(self):
-        print('({}, {}) is clicked.'.format(self.ind[0], self.ind[1]))
+        othello_bord = self._field.othello_bord
+        color = othello_bord.next_color
+        othello_bord.put(self.ind)
 
     def set_field(self, field):
         self._field = field
@@ -109,6 +111,7 @@ class OthelloBord(Frame):
 
         self._size = size
         self._button_mat = None
+        self._next_color = BLACK
         self._othello = Othello()
 
         self.init(master)
@@ -125,6 +128,14 @@ class OthelloBord(Frame):
                 self._button_mat[i][j].grid(row=i, column=j)
         self.synchronized_with_othello()
 
+    @property
+    def next_color(self):
+        return self._next_color
+
+    @property
+    def othello(self):
+        return self._othello
+
     def synchronized_with_othello(self):
         for i in range(self.size[0]):
             for j in range(self.size[1]):
@@ -132,6 +143,9 @@ class OthelloBord(Frame):
 
     def set_field(self, field):
         self._field = field
+        for i in range(self.size[0]):
+            for j in range(self.size[1]):
+                self._button_mat[i][j].set_field(field)
 
     def button_mat(self):
         return deepcopy(self._button_mat)
@@ -139,6 +153,11 @@ class OthelloBord(Frame):
     @property
     def size(self):
         return self._size
+
+    def put(self, ind):
+        self.othello.put(ind, self._next_color)
+        self.synchronized_with_othello()
+        self._next_color = self._next_color.different_color
 
 
 class SideButtonBarFrame(Frame):
