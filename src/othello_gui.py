@@ -41,6 +41,13 @@ class Field:
     def simulation_button(self):
         return self._simulation_button
 
+    def set_message_label(self, l):
+        self._message_label = l
+
+    @property
+    def message_label(self):
+        return self._message_label
+
 
 class OthelloCellButton(Button):
 
@@ -114,6 +121,13 @@ class SimulationButton(Button):
     def set_field(self, field):
         self._field = field
 
+class MessageLabel(Label):
+    def post(self, text):
+        self.configure(text=text)
+
+    def set_field(self, field):
+        self._field = field
+
 
 class OthelloBord(Frame):
 
@@ -158,6 +172,10 @@ class OthelloBord(Frame):
             for j in range(self.size[1]):
                 self._button_mat[i][j].set_field(field)
 
+    @property
+    def field(self):
+        return self._field
+
     def button_mat(self):
         return deepcopy(self._button_mat)
 
@@ -170,8 +188,8 @@ class OthelloBord(Frame):
             self.othello.put(ind, self._next_color)
             self.synchronized_with_othello()
             self._next_color = self._next_color.different_color
-        # else:
-        #     self.field.message_label.post("Can't put such color.")
+        else:
+            self.field.message_label.post("Can't put such color.")
 
 
 class SideButtonBarFrame(Frame):
@@ -190,6 +208,8 @@ class SideButtonBarFrame(Frame):
 
         self._simulation_button = SimulationButton(self)
         self._simulation_button.grid(row=3, column=0)
+        self._message_label = MessageLabel(self)
+        self._message_label.grid(row=4, column=0)
 
     @property
     def start_button(self):
@@ -212,6 +232,11 @@ class SideButtonBarFrame(Frame):
         self._clear_button.set_field(field)
         self._load_data_button.set_field(field)
         self._simulation_button.set_field(field)
+        self._message_label.set_field(field)
+
+    @property
+    def message_label(self):
+        return self._message_label
 
 
 if __name__ == '__main__':
@@ -229,6 +254,7 @@ if __name__ == '__main__':
     field.set_clear_button(side_frame.clear_button)
     field.set_load_data_button(side_frame.load_data_button)
     field.set_simulation_button(side_frame.simulation_button)
+    field.set_message_label(side_frame.message_label)
     bord.pack(side='left')
     side_frame.pack(side='left')
     root.mainloop()
