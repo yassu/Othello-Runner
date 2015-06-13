@@ -3,6 +3,12 @@ from copy import deepcopy
 
 from othello import DEFAULT_OTHELLO_SIZE
 
+class OthelloCellButton(Button):
+    def __init__(self, master=None, **kw):
+        if 'background' not in kw.keys():
+            kw['background'] = 'lime green'
+        Button.__init__(self, master, kw)
+
 
 class OthelloBord(Frame):
 
@@ -19,7 +25,7 @@ class OthelloBord(Frame):
                             range(self.size[1])]
         for i in range(self.size[0]):
             for j in range(self.size[1]):
-                self._button_mat[i][j] = Button(self, background="lime green")
+                self._button_mat[i][j] = OthelloCellButton(self)
                 self._button_mat[i][j].grid(row=i, column=j)
 
     def button_mat(self):
