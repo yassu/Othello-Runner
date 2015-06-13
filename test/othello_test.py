@@ -227,6 +227,23 @@ class OthelloTestCase(TestCase):
         assert(self.othello[5][5] == WHITE)
         assert(self.othello[4][4] == WHITE)
 
+    def put_test10(self):
+        " see above and take 2 cell"
+        self.othello.put((2, 3), BLACK)
+        self.othello.put((4, 2), WHITE)
+        self.othello.put((5, 4), BLACK)
+        self.othello.put((1, 3), WHITE)
+        assert(self.othello.count(WHITE) == 5)
+        assert(self.othello.count(BLACK) == 3)
+
+    def put_test11(self):
+        " see different direction "
+        self.othello.put((3, 2), BLACK)
+        self.othello.put((4, 2), WHITE)
+        self.othello.put((5, 2), BLACK)
+        assert(self.othello.count(BLACK) == 6)
+        assert(self.othello.count(WHITE) == 1)
+
     def pritty_str_test(self):
         assert(self.othello.pritty_str() == (
             "  01234567\n"
