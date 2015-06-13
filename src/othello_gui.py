@@ -176,6 +176,26 @@ class SideButtonBarFrame(Frame):
         self._all_put_button = AllPutButton(self)
         self._all_put_button.grid(row=4, column=0)
 
+    @property
+    def start_button(self):
+        return self._start_button
+
+    @property
+    def clear_button(self):
+        return self._clear_button
+
+    @property
+    def load_data_button(self):
+        return self._load_data_button
+
+    @property
+    def auto_put_button(self):
+        return self._auto_put_button
+
+    @property
+    def all_put_button(self):
+        return self._all_put_button
+
     def set_field(self, field):
         self._start_button.set_field(field)
         self._clear_button.set_field(field)
@@ -194,6 +214,12 @@ if __name__ == '__main__':
     field.set_othello_bord(bord)
 
     side_frame = SideButtonBarFrame(root)
+    side_frame.set_field(field)
+    field.set_start_button(self, side_frame.start_button)
+    field.set_clear_button(self, side_frame.clear_button)
+    field.set_load_data_button(self, side_frame.load_data_button)
+    field.set_auto_put_button(self, side_frame.auto_put_button)
+    field.set_all_put_button(self, side_frame.all_put_button)
     bord.pack(side='left')
     side_frame.pack(side='left')
     root.mainloop()
