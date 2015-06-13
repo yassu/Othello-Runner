@@ -32,19 +32,12 @@ class Field:
     def load_data_button(self):
         return self._load_data_button
 
-    def set_auto_put_button(self, b):
-        self._auto_put_button = b
+    def set_simulation_button(self, b):
+        self._simulation_button = b
 
     @property
-    def auto_put_button(self):
-        return self._auto_put_button
-
-    def set_all_put_button(self, b):
-        self._all_put_button = b
-
-    @property
-    def all_put_button(self):
-        return self._all_put_button
+    def simulation_button(self):
+        return self._simulation_button
 
 class OthelloCellButton(Button):
     def __init__(self, ind, master=None, **kw):
@@ -99,23 +92,15 @@ class LoadDataButton(Button):
     def set_field(self, field):
         self._field = field
 
-class AutoPutButton(Button):
+class SimulationButton(Button):
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
-            kw['text'] = 'Auto put'
+            kw['text'] = 'Simulation'
         Button.__init__(self, master, kw)
 
     def set_field(self, field):
         self._field = field
 
-class AllPutButton(Button):
-    def __init__(self, master=None, **kw):
-        if 'text' not in kw.keys():
-            kw['text'] = 'All put'
-        Button.__init__(self, master, kw)
-
-    def set_field(self, field):
-        self._field = field
 
 class OthelloBord(Frame):
 
@@ -170,11 +155,8 @@ class SideButtonBarFrame(Frame):
         self._load_data_button = LoadDataButton(self)
         self._load_data_button.grid(row=2, column=0)
 
-        self._auto_put_button = AutoPutButton(self)
-        self._auto_put_button.grid(row=3, column=0)
-
-        self._all_put_button = AllPutButton(self)
-        self._all_put_button.grid(row=4, column=0)
+        self._simulation_button = SimulationButton(self)
+        self._simulation_button.grid(row=3, column=0)
 
     @property
     def start_button(self):
@@ -189,19 +171,14 @@ class SideButtonBarFrame(Frame):
         return self._load_data_button
 
     @property
-    def auto_put_button(self):
-        return self._auto_put_button
-
-    @property
-    def all_put_button(self):
-        return self._all_put_button
+    def simulation_button(self):
+        return self._simulation_button
 
     def set_field(self, field):
         self._start_button.set_field(field)
         self._clear_button.set_field(field)
         self._load_data_button.set_field(field)
-        self._auto_put_button.set_field(field)
-        self._all_put_button.set_field(field)
+        self._simulation_button.set_field(field)
 
 
 if __name__ == '__main__':
@@ -218,8 +195,7 @@ if __name__ == '__main__':
     field.set_start_button(side_frame.start_button)
     field.set_clear_button(side_frame.clear_button)
     field.set_load_data_button(side_frame.load_data_button)
-    field.set_auto_put_button(side_frame.auto_put_button)
-    field.set_all_put_button(side_frame.all_put_button)
+    field.set_simulation_button(side_frame.simulation_button)
     bord.pack(side='left')
     side_frame.pack(side='left')
     root.mainloop()
