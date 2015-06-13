@@ -75,7 +75,7 @@ class StartButton(Button):
             kw['text'] = 'Start'
         Button.__init__(self, master, kw)
 
-    def set_field(self):
+    def set_field(self, field):
         self._field = field
 
     def get_name(self):
@@ -87,7 +87,7 @@ class ClearButton(Button):
             kw['text'] = 'Clear'
         Button.__init__(self, master, kw)
 
-    def set_field(self):
+    def set_field(self, field):
         self._field = field
 
 class LoadDataButton(Button):
@@ -96,7 +96,7 @@ class LoadDataButton(Button):
             kw['text'] = 'Load Data'
         Button.__init__(self, master, kw)
 
-    def set_field(self):
+    def set_field(self, field):
         self._field = field
 
 class AutoPutButton(Button):
@@ -105,7 +105,7 @@ class AutoPutButton(Button):
             kw['text'] = 'Auto put'
         Button.__init__(self, master, kw)
 
-    def set_field(self):
+    def set_field(self, field):
         self._field = field
 
 class AllPutButton(Button):
@@ -114,7 +114,7 @@ class AllPutButton(Button):
             kw['text'] = 'All put'
         Button.__init__(self, master, kw)
 
-    def set_field(self):
+    def set_field(self, field):
         self._field = field
 
 class OthelloBord(Frame):
@@ -215,11 +215,11 @@ if __name__ == '__main__':
 
     side_frame = SideButtonBarFrame(root)
     side_frame.set_field(field)
-    field.set_start_button(self, side_frame.start_button)
-    field.set_clear_button(self, side_frame.clear_button)
-    field.set_load_data_button(self, side_frame.load_data_button)
-    field.set_auto_put_button(self, side_frame.auto_put_button)
-    field.set_all_put_button(self, side_frame.all_put_button)
+    field.set_start_button(side_frame.start_button)
+    field.set_clear_button(side_frame.clear_button)
+    field.set_load_data_button(side_frame.load_data_button)
+    field.set_auto_put_button(side_frame.auto_put_button)
+    field.set_all_put_button(side_frame.all_put_button)
     bord.pack(side='left')
     side_frame.pack(side='left')
     root.mainloop()
