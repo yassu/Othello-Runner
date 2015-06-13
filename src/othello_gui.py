@@ -166,9 +166,12 @@ class OthelloBord(Frame):
         return self._size
 
     def put(self, ind):
-        self.othello.put(ind, self._next_color)
-        self.synchronized_with_othello()
-        self._next_color = self._next_color.different_color
+        if self.othello.puttable(ind, self._next_color):
+            self.othello.put(ind, self._next_color)
+            self.synchronized_with_othello()
+            self._next_color = self._next_color.different_color
+        # else:
+        #     self.field.message_label.post("Can't put such color.")
 
 
 class SideButtonBarFrame(Frame):
