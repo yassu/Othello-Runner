@@ -162,10 +162,16 @@ class IndicatePuttableCellButton(Button):
         Button.__init__(self, master, kw, command=self.clicked_event)
 
     def clicked_event(self):
-        print('Indicate Puttable Cell Button is clicked.')
+        for i, j in self.field.othello_bord.othello.puttable_inds(
+                self.field.othello_bord.next_color):
+            self.field.othello_bord.button_mat[i][j].change_color('Red')
 
     def set_field(self, field):
         self._field = field
+
+    @property
+    def field(self):
+        return self._field
 
 
 class MessageLabel(Label):
@@ -225,8 +231,9 @@ class OthelloBord(Frame):
     def field(self):
         return self._field
 
+    @property
     def button_mat(self):
-        return deepcopy(self._button_mat)
+        return self._button_mat
 
     @property
     def size(self):

@@ -207,7 +207,6 @@ class Othello:
             for j in range(self.size[1]):
                 if self.puttable((i, j), color):
                     inds.add((i, j))
-                    print(inds)
         return inds
 
 
