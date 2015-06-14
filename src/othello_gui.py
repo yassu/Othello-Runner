@@ -86,7 +86,10 @@ class StartButton(Button):
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
             kw['text'] = 'Start'
-        Button.__init__(self, master, kw)
+        Button.__init__(self, master, kw, command=self.clicked_event)
+
+    def clicked_event(self):
+        print('Start Button is clicked')
 
     def set_field(self, field):
         self._field = field
@@ -100,7 +103,10 @@ class ClearButton(Button):
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
             kw['text'] = 'Clear'
-        Button.__init__(self, master, kw)
+        Button.__init__(self, master, kw, command=self.clicked_event)
+
+    def clicked_event(self):
+        print('Clear Button is clicked.')
 
     def set_field(self, field):
         self._field = field
@@ -111,7 +117,10 @@ class LoadDataButton(Button):
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
             kw['text'] = 'Load Data'
-        Button.__init__(self, master, kw)
+        Button.__init__(self, master, kw, command=self.clicked_event)
+
+    def clicked_event(self):
+        print('Load Data Button is clicked')
 
     def set_field(self, field):
         self._field = field
@@ -122,7 +131,10 @@ class SimulationButton(Button):
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
             kw['text'] = 'Simulation'
-        Button.__init__(self, master, kw)
+        Button.__init__(self, master, kw, command=self.clicked_event)
+
+    def clicked_event(self):
+        print('Simulation Button is clicked')
 
     def set_field(self, field):
         self._field = field
