@@ -1,4 +1,8 @@
-from Tkinter import *
+from sys import version_info
+if version_info.major == 2:
+    from Tkinter import *
+elif version_info.major == 3:
+    from tkinter import *
 from copy import deepcopy
 
 from othello import DEFAULT_OTHELLO_SIZE, Othello, BLACK, UNDEF
