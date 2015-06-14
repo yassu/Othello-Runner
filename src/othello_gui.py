@@ -151,6 +151,9 @@ class MessageLabel(Label):
     def set_field(self, field):
         self._field = field
 
+    def clear(self):
+        self.post('')
+
 
 class OthelloBord(Frame):
 
@@ -220,6 +223,8 @@ class OthelloBord(Frame):
 
     def clear(self):
         self._othello = Othello()
+        self._next_color = BLACK
+        self.field.message_label.clear()
         self.synchronized_with_othello()
 
 
