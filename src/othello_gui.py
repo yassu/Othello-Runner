@@ -127,7 +127,9 @@ class SimulationButton(Button):
     def set_field(self, field):
         self._field = field
 
+
 class MessageLabel(Label):
+
     def post(self, text):
         self.configure(text=text)
 
@@ -148,8 +150,9 @@ class OthelloBord(Frame):
         self.init(master)
 
     def init(self, master=None):
-        self._button_mat = [[0 for i in range(self.size[0])] for j in
-                            range(self.size[1])]
+        self._button_mat = [
+            [0 for i in range(self.size[0])]
+            for j in range(self.size[1])]
         for i in range(self.size[0]):
             for j in range(self.size[1]):
                 self._button_mat[i][j] = OthelloCellButton(
