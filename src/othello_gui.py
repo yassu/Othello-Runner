@@ -106,10 +106,15 @@ class ClearButton(Button):
         Button.__init__(self, master, kw, command=self.clicked_event)
 
     def clicked_event(self):
-        print('Clear Button is clicked.')
+        # print('Clear Button is clicked.')
+        self.field.othello_bord.clear()
 
     def set_field(self, field):
         self._field = field
+
+    @property
+    def field(self):
+        return self._field
 
 
 class LoadDataButton(Button):
