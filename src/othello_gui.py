@@ -268,4 +268,6 @@ if __name__ == '__main__':
     field.set_message_label(side_frame.message_label)
     bord.pack(side='left')
     side_frame.pack(side='left')
+
+    field.message_label.post('first color: {}'.format(BLACK.color))
     root.mainloop()
