@@ -93,8 +93,23 @@ class OthelloCellButton(Button):
         else:
             self.configure(text=str(color))
 
+class SideButton(Button):
+    def set_field(self, field):
+        self._field = field
 
-class StartButton(Button):
+    @property
+    def field(self):
+        return self._field
+
+    @property
+    def bord(self):
+        return self.field.othello_bord
+
+    @property
+    def othello(self):
+        return self.bord.othello
+
+class StartButton(SideButton):
 
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
@@ -107,11 +122,7 @@ class StartButton(Button):
     def set_field(self, field):
         self._field = field
 
-    def get_name(self):
-        return 'Start'
-
-
-class ClearButton(Button):
+class ClearButton(SideButton):
 
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
@@ -120,17 +131,10 @@ class ClearButton(Button):
 
     def clicked_event(self):
         # print('Clear Button is clicked.')
-        self.field.othello_bord.clear()
+        # self.field.othello_bord.clear()
+        self.bord.clear()
 
-    def set_field(self, field):
-        self._field = field
-
-    @property
-    def field(self):
-        return self._field
-
-
-class LoadDataButton(Button):
+class LoadDataButton(SideButton):
 
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
@@ -140,11 +144,7 @@ class LoadDataButton(Button):
     def clicked_event(self):
         print('Load Data Button is clicked')
 
-    def set_field(self, field):
-        self._field = field
-
-
-class SimulationButton(Button):
+class SimulationButton(SideButton):
 
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
@@ -154,10 +154,7 @@ class SimulationButton(Button):
     def clicked_event(self):
         print('Simulation Button is clicked')
 
-    def set_field(self, field):
-        self._field = field
-
-class IndicatePuttableCellButton(Button):
+class IndicatePuttableCellButton(SideButton):
     def __init__(self, master=None, **kw):
         if 'text' not in kw.keys():
             kw['text'] = 'Puttable Indexes'
@@ -166,15 +163,7 @@ class IndicatePuttableCellButton(Button):
     def clicked_event(self):
         for i, j in self.field.othello_bord.othello.puttable_inds(
                 self.field.othello_bord.next_color):
-            self.field.othello_bord.button_mat[i][j].change_color('Red')
-
-    def set_field(self, field):
-        self._field = field
-
-    @property
-    def field(self):
-        return self._field
-
+            self.bord.button_mat[i][j].change_color('Red')
 
 class MessageLabel(Label):
 
