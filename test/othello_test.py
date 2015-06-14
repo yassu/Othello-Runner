@@ -167,6 +167,14 @@ class OthelloTestCase(TestCase):
         assert(self.othello.puttable((5, 5), WHITE) is True)
         self.othello._mat[4][4] = WHITE
 
+    def puttable_inds_test1(self):
+        assert(self.othello.puttable_inds(BLACK) ==
+            {(2, 3), (3, 2), (5, 4), (4, 5)})
+
+    def puttable_inds_test2(self):
+        self.othello.put((2, 3), BLACK)
+        self.othello.puttable_inds(WHITE) == {(2, 4), (2, 2), (4, 2)}
+
     def puttable_somewhere_test(self):
         assert(self.othello.puttable_somewhere(WHITE) is True)
 

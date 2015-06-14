@@ -1,8 +1,11 @@
 from random import shuffle as random_shuffle
 from copy import deepcopy
+from sys import version_info
 
 DEFAULT_OTHELLO_SIZE = (8, 8)
 
+if version_info.major == 2:
+    input = raw_input
 
 class OthelloCell:
 
@@ -197,6 +200,15 @@ class Othello:
         j = ind[1]
 
         return False
+
+    def puttable_inds(self, color):
+        inds = set()
+        for i in range(self.size[0]):
+            for j in range(self.size[1]):
+                if self.puttable((i, j), color):
+                    inds.add((i, j))
+        return inds
+
 
     def puttable_somewhere(self, color):
         for i in range(self.size[0]):
@@ -404,7 +416,7 @@ class Player:
     def othello(self):
         return self._othello
 
-    def get_next_move(self, in_=raw_input):
+    def get_next_move(self, in_=input):
         print('{} input:'.format(self.name))
         ind = s_ind_to_ind(in_())
         return ind
