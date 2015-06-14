@@ -64,6 +64,8 @@ class OthelloCellButton(Button):
     def clicked_event(self):
         othello_bord = self._field.othello_bord
         othello_bord.put(self.ind)
+        if othello.filled():
+            self.field.message_label.post('{} win.'.format())
 
     def set_field(self, field):
         self._field = field
@@ -188,6 +190,8 @@ class OthelloBord(Frame):
             self.othello.put(ind, self._next_color)
             self.synchronized_with_othello()
             self._next_color = self._next_color.different_color
+            self.field.message_label.post(
+                'next color: {}.'.format(repr(self.next_color.color)))
         else:
             self.field.message_label.post("Can't put such color.")
 

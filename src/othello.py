@@ -320,6 +320,19 @@ class Othello:
             i -= 1
             j -= 1
 
+    def win_color(self):
+        if not self.finished():
+            raise ValueError('This othello not finished')
+
+        black_cnt = self.count(BLACK)
+        white_cnt = self.count(WHITE)
+        if black_cnt > white_cnt:
+            return BLACK
+        elif black_cnt == white_cnt:
+            return None
+        else:   # black_cnt < white_cnt
+            return WHITE
+
     def pritty_str(self):
         s = "  "
         s += ''.join(list(map(str, range(self.size[1])))) + "\n"

@@ -250,6 +250,32 @@ class OthelloTestCase(TestCase):
         assert(self.othello.count(BLACK) == 6)
         assert(self.othello.count(WHITE) == 1)
 
+    @raises(ValueError)
+    def win_color_test(self):
+        self.othello.win_color()
+
+    def win_color_test2(self):
+        for i in range(8):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+        assert(self.othello.win_color() == BLACK)
+
+    def win_color_test3(self):
+        for i in range(4):
+            for j in range(8):
+                self.othello._mat[i][j] = BLACK
+
+        for i in range(4, 8):
+            for j in range(8):
+                self.othello._mat[i][j] = WHITE
+        assert(self.othello.win_color() == None)
+
+    def win_color_test4(self):
+        for i in range(8):
+            for j in range(8):
+                self.othello._mat[i][j] = WHITE
+        assert(self.othello.win_color() == WHITE)
+
     def pritty_str_test(self):
         assert(self.othello.pritty_str() == (
             "  01234567\n"
