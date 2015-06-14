@@ -64,11 +64,15 @@ class OthelloCellButton(Button):
     def clicked_event(self):
         othello_bord = self._field.othello_bord
         othello_bord.put(self.ind)
-        if othello.filled():
+        if self.field._othello_bord.othello.filled():
             self.field.message_label.post('{} win.'.format())
 
     def set_field(self, field):
         self._field = field
+
+    @property
+    def field(self):
+        return self._field
 
     def change_color(self, color):
         if color == UNDEF:
