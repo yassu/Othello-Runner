@@ -7,6 +7,7 @@ DEFAULT_OTHELLO_SIZE = (8, 8)
 if version_info.major == 2:
     input = raw_input
 
+
 class OthelloCell:
 
     def __init__(self, color):
@@ -208,7 +209,6 @@ class Othello:
                 if self.puttable((i, j), color):
                     inds.add((i, j))
         return inds
-
 
     def puttable_somewhere(self, color):
         for i in range(self.size[0]):

@@ -3,12 +3,12 @@ if version_info.major == 2:
     from Tkinter import *
 elif version_info.major == 3:
     from tkinter import *
-from copy import deepcopy
 
 from othello import DEFAULT_OTHELLO_SIZE, Othello, BLACK, UNDEF
 
-OTHELLO_CELL_WIDTH  = 1
+OTHELLO_CELL_WIDTH = 1
 OTHELLO_CELL_HEIGHT = 1
+
 
 class Field:
 
@@ -69,7 +69,9 @@ class OthelloCellButton(Button):
         else:
             self.configure(text=str(color))
 
+
 class SideButton(Button):
+
     def __init__(self, master=None, **kw):
         kw['text'] = kw.get('text', self.name)
         Button.__init__(self, master, kw, command=self.clicked_event)
@@ -96,6 +98,7 @@ class SideButton(Button):
     def name(self):
         pass
 
+
 class StartButton(SideButton):
 
     def clicked_event(self):
@@ -104,6 +107,7 @@ class StartButton(SideButton):
     @property
     def name(self):
         return "Start"
+
 
 class ClearButton(SideButton):
 
@@ -114,6 +118,7 @@ class ClearButton(SideButton):
     def name(self):
         return "Clear"
 
+
 class LoadDataButton(SideButton):
 
     def clicked_event(self):
@@ -123,6 +128,7 @@ class LoadDataButton(SideButton):
     def name(self):
         return "Load Data"
 
+
 class SimulationButton(SideButton):
 
     def clicked_event(self):
@@ -131,6 +137,7 @@ class SimulationButton(SideButton):
     @property
     def name(self):
         return "Simulation"
+
 
 class IndicatePuttableCellButton(SideButton):
 
@@ -142,6 +149,7 @@ class IndicatePuttableCellButton(SideButton):
     @property
     def name(self):
         return "Puttable Indexes"
+
 
 class MessageLabel(Label):
 

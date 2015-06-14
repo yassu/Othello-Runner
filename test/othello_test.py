@@ -169,7 +169,7 @@ class OthelloTestCase(TestCase):
 
     def puttable_inds_test1(self):
         assert(self.othello.puttable_inds(BLACK) ==
-            {(2, 3), (3, 2), (5, 4), (4, 5)})
+               {(2, 3), (3, 2), (5, 4), (4, 5)})
 
     def puttable_inds_test2(self):
         self.othello.put((2, 3), BLACK)
@@ -276,7 +276,7 @@ class OthelloTestCase(TestCase):
         for i in range(4, 8):
             for j in range(8):
                 self.othello._mat[i][j] = WHITE
-        assert(self.othello.win_color() == None)
+        assert(self.othello.win_color() is None)
 
     def win_color_test4(self):
         for i in range(8):
