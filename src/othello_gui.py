@@ -219,29 +219,33 @@ class OthelloBord(Frame):
         else:
             self.field.message_label.post("Can't put such color.")
 
+    def clear(self):
+        self._othello = Othello()
+        self.synchronized_with_othello()
+
 
 class SideButtonBarFrame(Frame):
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
 
-        self._start_button = StartButton(self)
-        self._start_button.grid(row=0, column=0)
+        # self._start_button = StartButton(self)
+        # self._start_button.grid(row=0, column=0)
 
         self._clear_button = ClearButton(self)
         self._clear_button.grid(row=1, column=0)
 
-        self._load_data_button = LoadDataButton(self)
-        self._load_data_button.grid(row=2, column=0)
+        # self._load_data_button = LoadDataButton(self)
+        # self._load_data_button.grid(row=2, column=0)
 
-        self._simulation_button = SimulationButton(self)
-        self._simulation_button.grid(row=3, column=0)
+        # self._simulation_button = SimulationButton(self)
+        # self._simulation_button.grid(row=3, column=0)
         self._message_label = MessageLabel(self)
         self._message_label.grid(row=4, column=0)
 
-    @property
-    def start_button(self):
-        return self._start_button
+    # @property
+    # def start_button(self):
+    #     return self._start_button
 
     @property
     def clear_button(self):
@@ -256,10 +260,10 @@ class SideButtonBarFrame(Frame):
         return self._simulation_button
 
     def set_field(self, field):
-        self._start_button.set_field(field)
+        # self._start_button.set_field(field)
         self._clear_button.set_field(field)
-        self._load_data_button.set_field(field)
-        self._simulation_button.set_field(field)
+        # self._load_data_button.set_field(field)
+        # self._simulation_button.set_field(field)
         self._message_label.set_field(field)
 
     @property
@@ -278,10 +282,10 @@ if __name__ == '__main__':
 
     side_frame = SideButtonBarFrame(root)
     side_frame.set_field(field)
-    field.set_start_button(side_frame.start_button)
+    # field.set_start_button(side_frame.start_button)
     field.set_clear_button(side_frame.clear_button)
-    field.set_load_data_button(side_frame.load_data_button)
-    field.set_simulation_button(side_frame.simulation_button)
+    # field.set_load_data_button(side_frame.load_data_button)
+    # field.set_simulation_button(side_frame.simulation_button)
     field.set_message_label(side_frame.message_label)
     bord.pack(side='left')
     side_frame.pack(side='left')
