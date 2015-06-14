@@ -12,6 +12,9 @@ OTHELLO_CELL_HEIGHT = 1
 
 class Field:
 
+    def __init__(self):
+        self._buttons = {}
+
     def set_othello_bord(self, bord):
         self._othello_bord = bord
 
@@ -19,40 +22,14 @@ class Field:
     def othello_bord(self):
         return self._othello_bord
 
-    def set_start_button(self, b):
-        self._start_button = b
+    def set_button(self, b, ref_name):
+        self._buttons[ref_name] = b
 
-    @property
-    def start_button(self):
-        return self._start_button
+    def get_button(self, ref_name):
+        return self._buttons[ref_name]
 
-    def set_clear_button(self, b):
-        self._clear_button = b
-
-    @property
-    def clear_button(self):
-        return self._clear_button
-
-    def set_load_data_button(self, b):
-        self._load_data_button = b
-
-    @property
-    def load_data_button(self):
-        return self._load_data_button
-
-    def set_simulation_button(self, b):
-        self._simulation_button = b
-
-    @property
-    def simulation_button(self):
-        return self._simulation_button
-
-    def set_indicate_puttable_cell_button(self, b):
-        self._indicate_puttable_cell_button = b
-
-    @property
-    def indicate_puttable_cell_button(self):
-        return self._indicate_puttable_cell_button
+    def buttons(self):
+        return list(self._buttons.values())
 
     def set_message_label(self, l):
         self._message_label = l
@@ -109,6 +86,10 @@ class SideButton(Button):
     def othello(self):
         return self.bord.othello
 
+    @property
+    def name(self):
+        pass
+
 class StartButton(SideButton):
 
     def __init__(self, master=None, **kw):
@@ -119,8 +100,9 @@ class StartButton(SideButton):
     def clicked_event(self):
         print('Start Button is clicked')
 
-    def set_field(self, field):
-        self._field = field
+    @property
+    def name(self):
+        return "Start"
 
 class ClearButton(SideButton):
 
@@ -130,9 +112,11 @@ class ClearButton(SideButton):
         Button.__init__(self, master, kw, command=self.clicked_event)
 
     def clicked_event(self):
-        # print('Clear Button is clicked.')
-        # self.field.othello_bord.clear()
         self.bord.clear()
+
+    @property
+    def name(self):
+        return "Clear"
 
 class LoadDataButton(SideButton):
 
@@ -144,6 +128,10 @@ class LoadDataButton(SideButton):
     def clicked_event(self):
         print('Load Data Button is clicked')
 
+    @property
+    def name(self):
+        return "Load Data"
+
 class SimulationButton(SideButton):
 
     def __init__(self, master=None, **kw):
@@ -153,6 +141,10 @@ class SimulationButton(SideButton):
 
     def clicked_event(self):
         print('Simulation Button is clicked')
+
+    @property
+    def name(self):
+        return "Simulation"
 
 class IndicatePuttableCellButton(SideButton):
     def __init__(self, master=None, **kw):
@@ -164,6 +156,10 @@ class IndicatePuttableCellButton(SideButton):
         for i, j in self.field.othello_bord.othello.puttable_inds(
                 self.field.othello_bord.next_color):
             self.bord.button_mat[i][j].change_color('Red')
+
+    @property
+    def name(self):
+        return "Puttable Indexes"
 
 class MessageLabel(Label):
 
@@ -288,13 +284,14 @@ class SideButtonBarFrame(Frame):
     def indicate_puttable_cell_button(self):
         return self._indicate_puttable_cell_button
 
+    @property
+    def buttons(self):
+        return (self._clear_button,
+                self._indicate_puttable_cell_button)
+
     def set_field(self, field):
-        # self._start_button.set_field(field)
-        self._clear_button.set_field(field)
-        # self._load_data_button.set_field(field)
-        # self._simulation_button.set_field(field)
-        self._indicate_puttable_cell_button.set_field(field)
-        self._message_label.set_field(field)
+        for b in self.buttons:
+            b.set_field(field)
 
     @property
     def message_label(self):
@@ -312,11 +309,8 @@ if __name__ == '__main__':
 
     side_frame = SideButtonBarFrame(root)
     side_frame.set_field(field)
-    # field.set_start_button(side_frame.start_button)
-    field.set_clear_button(side_frame.clear_button)
-    # field.set_load_data_button(side_frame.load_data_button)
-    # field.set_simulation_button(side_frame.simulation_button)
-    field.set_indicate_puttable_cell_button(side_frame.indicate_puttable_cell_button)
+    for b in side_frame.buttons:
+        field.set_button(b, b.name)
     field.set_message_label(side_frame.message_label)
     bord.pack(side='left')
     side_frame.pack(side='left')
