@@ -42,8 +42,7 @@ class Field:
 class OthelloCellButton(Button):
 
     def __init__(self, ind, master=None, **kw):
-        if 'background' not in kw.keys():
-            kw['background'] = 'lime green'
+        kw['background'] = kw.get('background', 'lime green')
         Button.__init__(self, master, kw, command=self.clicked_event)
         self._ind = ind
 
@@ -71,6 +70,13 @@ class OthelloCellButton(Button):
             self.configure(text=str(color))
 
 class SideButton(Button):
+    def __init__(self, master=None, **kw):
+        kw['text'] = kw.get('text', self.name)
+        Button.__init__(self, master, kw, command=self.clicked_event)
+
+    def clicked_event(self):
+        pass
+
     def set_field(self, field):
         self._field = field
 
@@ -92,11 +98,6 @@ class SideButton(Button):
 
 class StartButton(SideButton):
 
-    def __init__(self, master=None, **kw):
-        if 'text' not in kw.keys():
-            kw['text'] = 'Start'
-        Button.__init__(self, master, kw, command=self.clicked_event)
-
     def clicked_event(self):
         print('Start Button is clicked')
 
@@ -105,11 +106,6 @@ class StartButton(SideButton):
         return "Start"
 
 class ClearButton(SideButton):
-
-    def __init__(self, master=None, **kw):
-        if 'text' not in kw.keys():
-            kw['text'] = 'Clear'
-        Button.__init__(self, master, kw, command=self.clicked_event)
 
     def clicked_event(self):
         self.bord.clear()
@@ -120,11 +116,6 @@ class ClearButton(SideButton):
 
 class LoadDataButton(SideButton):
 
-    def __init__(self, master=None, **kw):
-        if 'text' not in kw.keys():
-            kw['text'] = 'Load Data'
-        Button.__init__(self, master, kw, command=self.clicked_event)
-
     def clicked_event(self):
         print('Load Data Button is clicked')
 
@@ -134,11 +125,6 @@ class LoadDataButton(SideButton):
 
 class SimulationButton(SideButton):
 
-    def __init__(self, master=None, **kw):
-        if 'text' not in kw.keys():
-            kw['text'] = 'Simulation'
-        Button.__init__(self, master, kw, command=self.clicked_event)
-
     def clicked_event(self):
         print('Simulation Button is clicked')
 
@@ -147,10 +133,6 @@ class SimulationButton(SideButton):
         return "Simulation"
 
 class IndicatePuttableCellButton(SideButton):
-    def __init__(self, master=None, **kw):
-        if 'text' not in kw.keys():
-            kw['text'] = 'Puttable Indexes'
-        Button.__init__(self, master, kw, command=self.clicked_event)
 
     def clicked_event(self):
         for i, j in self.field.othello_bord.othello.puttable_inds(
