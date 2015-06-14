@@ -3,6 +3,8 @@ from copy import deepcopy
 
 from othello import DEFAULT_OTHELLO_SIZE, Othello, BLACK, UNDEF
 
+OTHELLO_CELL_WIDTH  = 1
+OTHELLO_CELL_HEIGHT = 1
 
 class Field:
 
@@ -158,7 +160,7 @@ class OthelloBord(Frame):
                 self._button_mat[i][j] = OthelloCellButton(
                     (i, j),
                     self,
-                    width=1, height=1)
+                    width=OTHELLO_CELL_WIDTH, height=OTHELLO_CELL_HEIGHT)
                 self._button_mat[i][j].grid(row=i, column=j)
         self.synchronized_with_othello()
 
