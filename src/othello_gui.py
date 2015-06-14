@@ -9,6 +9,7 @@ from othello import DEFAULT_OTHELLO_SIZE, Othello, BLACK, UNDEF
 OTHELLO_CELL_WIDTH = 1
 OTHELLO_CELL_HEIGHT = 1
 
+root = Tk()
 
 class Field:
 
@@ -294,7 +295,6 @@ class SideButtonBarFrame(Frame):
 
 
 if __name__ == '__main__':
-    root = Tk()
     root.title('Othello')
     field = Field()
 
