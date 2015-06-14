@@ -198,6 +198,16 @@ class Othello:
 
         return False
 
+    def puttable_inds(self, color):
+        inds = set()
+        for i in range(self.size[0]):
+            for j in range(self.size[1]):
+                if self.puttable((i, j), color):
+                    inds.add((i, j))
+                    print(inds)
+        return inds
+
+
     def puttable_somewhere(self, color):
         for i in range(self.size[0]):
             for j in range(self.size[1]):
