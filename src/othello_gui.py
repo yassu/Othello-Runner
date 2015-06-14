@@ -41,6 +41,13 @@ class Field:
     def simulation_button(self):
         return self._simulation_button
 
+    def set_indicate_puttable_cell_button(self, b):
+        self._indicate_puttable_cell_button = b
+
+    @property
+    def indicate_puttable_cell_button(self):
+        return self._indicate_puttable_cell_button
+
     def set_message_label(self, l):
         self._message_label = l
 
@@ -144,6 +151,18 @@ class SimulationButton(Button):
     def set_field(self, field):
         self._field = field
 
+class IndicatePuttableCellButton(Button):
+    def __init__(self, master=None, **kw):
+        if 'text' not in kw.keys():
+            kw['text'] = 'Puttable Indexes'
+        Button.__init__(self, master, kw, command=self.clicked_event)
+
+    def clicked_event(self):
+        print('Indicate Puttable Cell Button is clicked.')
+
+    def set_field(self, field):
+        self._field = field
+
 
 class MessageLabel(Label):
 
@@ -240,8 +259,12 @@ class SideButtonBarFrame(Frame):
 
         # self._simulation_button = SimulationButton(self)
         # self._simulation_button.grid(row=3, column=0)
+
+        self._indicate_puttable_cell_button = IndicatePuttableCellButton(self)
+        self._indicate_puttable_cell_button.grid(row=4, column=0)
+
         self._message_label = MessageLabel(self)
-        self._message_label.grid(row=4, column=0)
+        self._message_label.grid(row=5, column=0)
 
     # @property
     # def start_button(self):
@@ -259,11 +282,16 @@ class SideButtonBarFrame(Frame):
     def simulation_button(self):
         return self._simulation_button
 
+    @property
+    def indicate_puttable_cell_button(self):
+        return self._indicate_puttable_cell_button
+
     def set_field(self, field):
         # self._start_button.set_field(field)
         self._clear_button.set_field(field)
         # self._load_data_button.set_field(field)
         # self._simulation_button.set_field(field)
+        self._indicate_puttable_cell_button.set_field(field)
         self._message_label.set_field(field)
 
     @property
@@ -286,6 +314,7 @@ if __name__ == '__main__':
     field.set_clear_button(side_frame.clear_button)
     # field.set_load_data_button(side_frame.load_data_button)
     # field.set_simulation_button(side_frame.simulation_button)
+    field.set_indicate_puttable_cell_button(side_frame.indicate_puttable_cell_button)
     field.set_message_label(side_frame.message_label)
     bord.pack(side='left')
     side_frame.pack(side='left')
