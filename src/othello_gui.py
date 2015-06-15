@@ -293,22 +293,27 @@ class SideButtonBarFrame(Frame):
     def message_label(self):
         return self._message_label
 
+class GuiRunner:
+
+    def main(self):
+        root.title('Othello')
+        field = Field()
+
+        bord = OthelloBord(root)
+        bord.set_field(field)
+        field.set_othello_bord(bord)
+
+        side_frame = SideButtonBarFrame(root)
+        side_frame.set_field(field)
+        for b in side_frame.buttons:
+            field.set_button(b, b.name)
+        field.set_message_label(side_frame.message_label)
+        bord.pack(side='left')
+        side_frame.pack(side='left')
+
+        field.message_label.post('first color: {}'.format(BLACK.color))
+        root.mainloop()
+
 
 if __name__ == '__main__':
-    root.title('Othello')
-    field = Field()
-
-    bord = OthelloBord(root)
-    bord.set_field(field)
-    field.set_othello_bord(bord)
-
-    side_frame = SideButtonBarFrame(root)
-    side_frame.set_field(field)
-    for b in side_frame.buttons:
-        field.set_button(b, b.name)
-    field.set_message_label(side_frame.message_label)
-    bord.pack(side='left')
-    side_frame.pack(side='left')
-
-    field.message_label.post('first color: {}'.format(BLACK.color))
-    root.mainloop()
+    GuiRunner().main()
