@@ -1,3 +1,8 @@
+from sys import path
+path.append('src')
+from othello import CuiRunner
+from othello_gui import GuiRunner
+
 from optparse import OptionParser
 from sys import exit
 
@@ -10,9 +15,6 @@ def get_parser():
 def main():
     parser = get_parser()
     (options, _) = parser.parse_args()
-
-    print('options.cui: {}'.format(options.cui))
-    print('options.gui: {}'.format(options.gui))
 
     if options.cui and options.gui:
         print("Can't set both cui and gui option.")

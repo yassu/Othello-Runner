@@ -9,8 +9,6 @@ from othello import DEFAULT_OTHELLO_SIZE, Othello, BLACK, UNDEF
 OTHELLO_CELL_WIDTH = 1
 OTHELLO_CELL_HEIGHT = 1
 
-root = Tk()
-
 class Field:
 
     def __init__(self):
@@ -296,6 +294,8 @@ class SideButtonBarFrame(Frame):
 class GuiRunner:
 
     def main(self):
+        root = Tk()
+
         root.title('Othello')
         field = Field()
 
