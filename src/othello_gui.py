@@ -11,6 +11,7 @@ OTHELLO_CELL_HEIGHT = 1
 
 root = Tk()
 
+
 class Field:
 
     def __init__(self):
@@ -292,6 +293,7 @@ class SideButtonBarFrame(Frame):
     @property
     def message_label(self):
         return self._message_label
+
 
 class GuiRunner:
 
