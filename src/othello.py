@@ -451,6 +451,8 @@ class Player:
 
 def s_ind_to_ind(s_ind):
     s_ind = s_ind.replace(' ', '')
+    if s_ind.startswith('(') and s_ind.endswith(')'):
+        s_ind = s_ind[1:-1]
     first, second = s_ind.split(',')
     return int(first), int(second)
 
