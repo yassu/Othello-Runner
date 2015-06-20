@@ -9,6 +9,7 @@ from othello import DEFAULT_OTHELLO_SIZE, Othello, BLACK, UNDEF
 OTHELLO_CELL_WIDTH = 1
 OTHELLO_CELL_HEIGHT = 1
 
+
 class Field:
 
     def __init__(self):
@@ -290,6 +291,7 @@ class SideButtonBarFrame(Frame):
     @property
     def message_label(self):
         return self._message_label
+
 
 class GuiRunner:
 
