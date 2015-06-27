@@ -1,8 +1,11 @@
 from sys import version_info
-if version_info.major == 2:
-    from Tkinter import *
-elif version_info.major == 3:
-    from tkinter import *
+try:
+    if version_info.major == 2:
+        from Tkinter import *
+    elif version_info.major == 3:
+        from tkinter import *
+except ImportError:
+    print("Can't use tkinter")
 
 from othello import DEFAULT_OTHELLO_SIZE, Othello, BLACK, UNDEF
 
