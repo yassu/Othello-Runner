@@ -3,3 +3,5 @@
 *.obj
 
 task
+*.egg-info/
+.virtualenvs
