@@ -1,6 +1,6 @@
 from sys import path
-path.append('src')
-from othello import (
+path.append('othello')
+from othello.othello import (
     OthelloCell, BlackCell, WhiteCell, UndefCell,
     WHITE, BLACK, UNDEF,
     Othello, OthelloIter,
