@@ -2,7 +2,7 @@ from othello.othello import (
     OthelloCell, BlackCell, WhiteCell, UndefCell,
     WHITE, BLACK, UNDEF,
     Othello, OthelloIter,
-    Player, HumanPlayer,
+    Player, HumanPlayer, RandomPutPlayer,
     s_ind_to_ind)
 
 from unittest import TestCase
@@ -513,6 +513,18 @@ class HumanPlayerTestCase(TestCase):
     @raises(ValueError)
     def get_next_move_test3(self):
         self.player.get_next_move(_in=lambda: 'abcdef')
+
+
+class RandomPutPlayerTestCase(TestCase):
+
+    def setUp(self):
+        self.othello = Othello()
+        self.player = RandomPutPlayer('enemy', self.othello, BLACK)
+
+    def get_next_move_test(self):
+        ind = self.player.get_next_move()
+        self.player.put(ind)
+        assert(self.othello.count(self.player.color) == 4)
 
 
 def s_ind_to_ind_test():

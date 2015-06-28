@@ -1,4 +1,5 @@
 from random import shuffle as random_shuffle
+from random import choice as random_choice
 from copy import deepcopy
 from sys import version_info
 
@@ -422,6 +423,9 @@ class Player:
     def puttable(self, ind):
         return self._othello.puttable(ind, self.color)
 
+    def puttable_inds(self):
+        return self.othello.puttable_inds(self.color)
+
     def get_next_move(self):
         pass
 
@@ -456,6 +460,12 @@ class HumanPlayer(Player):
         print('{} input:'.format(self.name))
         ind = s_ind_to_ind(_in())
         return ind
+
+
+class RandomPutPlayer(Player):
+
+    def get_next_move(self, _in=input):
+        return random_choice(list(self.puttable_inds()))
 
 
 def s_ind_to_ind(s_ind):
