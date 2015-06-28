@@ -2,7 +2,7 @@ from othello.othello import (
     OthelloCell, BlackCell, WhiteCell, UndefCell,
     WHITE, BLACK, UNDEF,
     Othello, OthelloIter,
-    Player,
+    Player, HumanPlayer,
     s_ind_to_ind)
 
 from unittest import TestCase
@@ -496,22 +496,23 @@ class PlayerTestCase(TestCase):
                 self.othello._mat[i][j] = WHITE
         assert(self.player.lost() is True)
 
+
 class HumanPlayerTestCase(TestCase):
+
     def setUp(self):
         self.othello = Othello()
-        self.player = Player('user', self.othello, BLACK)
+        self.player = HumanPlayer('user', self.othello, BLACK)
 
     def get_next_move_test(self):
-        assert(self.player.get_next_move(in_=lambda: '1, 2') == (1, 2))
+        assert(self.player.get_next_move(_in=lambda: '1, 2') == (1, 2))
 
     @raises(ValueError)
     def get_next_move_test2(self):
-        self.player.get_next_move(in_=lambda: 'ab, def')
+        self.player.get_next_move(_in=lambda: 'ab, def')
 
     @raises(ValueError)
     def get_next_move_test3(self):
-        self.player.get_next_move(in_=lambda: 'abcdef')
-
+        self.player.get_next_move(_in=lambda: 'abcdef')
 
 
 def s_ind_to_ind_test():

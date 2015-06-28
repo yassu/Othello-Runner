@@ -387,7 +387,7 @@ class OthelloIter:
     def __iter__(self):
         return self
 
-    def next(self): # iterator of python2
+    def next(self):  # iterator of python2
         if len(self._data) == 0:
             raise StopIteration()
 
@@ -396,7 +396,7 @@ class OthelloIter:
         self._othello.put(ind, color)
         return self._othello
 
-    def __next__(self): # iterator of python3
+    def __next__(self):  # iterator of python3
         return self.next()
 
 
@@ -422,6 +422,9 @@ class Player:
     def puttable(self, ind):
         return self._othello.puttable(ind, self.color)
 
+    def get_next_move(self):
+        pass
+
     def puttable_somewhere(self):
         return self.othello.puttable_somewhere(self.color)
 
@@ -446,12 +449,14 @@ class Player:
             othello.count(self.color) < round(
                 othello.size[0] * othello.size[1] // 2)
 
+
 class HumanPlayer(Player):
 
     def get_next_move(self, _in=input):
         print('{} input:'.format(self.name))
-        ind = s_ind_to_ind(in_())
+        ind = s_ind_to_ind(_in())
         return ind
+
 
 def s_ind_to_ind(s_ind):
     s_ind = s_ind.replace(' ', '')
