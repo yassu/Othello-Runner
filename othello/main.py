@@ -1,10 +1,7 @@
-from sys import path
-path.append('src')
-from othello import CuiRunner
-from othello_gui import GuiRunner
-
 from optparse import OptionParser
 from sys import exit
+from othello import CuiRunner
+from othello_gui import GuiRunner
 
 
 def get_parser():

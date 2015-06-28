@@ -1,5 +1,3 @@
-from sys import path
-path.append('othello')
 from othello.othello import (
     OthelloCell, BlackCell, WhiteCell, UndefCell,
     WHITE, BLACK, UNDEF,
@@ -522,6 +520,7 @@ def s_ind_to_ind_test2():
 @raises(ValueError)
 def s_ind_to_ind_test3():
     s_ind_to_ind('abcdef')
+
 
 def s_inds_to_ind_test4():
     assert(s_ind_to_ind('  ( 1 ,  2 )  ') == (1, 2))
