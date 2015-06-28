@@ -1,0 +1,10 @@
+- [ ] ウィンドウの縮小, 拡大に対応する
+- [ ] SideBarのButtonを左上寄せにする
+- [ ] AIが完成してから, StartButtonをつける
+- [ ] Simulationが完成してからload_data, SimulationButtonをつける.
+- [x] GUIのRunnerを定義する [2015/06/16 07:21]
+- [x] CUIオプションが指定されたときはCUIのRunnerを実行する. defaultはGUI. [2015/06/16 07:10]
+setup.py
+  classifier
+tox.ini
+  flake8
