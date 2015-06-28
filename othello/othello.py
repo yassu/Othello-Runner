@@ -387,7 +387,7 @@ class OthelloIter:
     def __iter__(self):
         return self
 
-    def next(self):
+    def next(self): # iterator of python2
         if len(self._data) == 0:
             raise StopIteration()
 
@@ -395,6 +395,9 @@ class OthelloIter:
         del(self._data[0])
         self._othello.put(ind, color)
         return self._othello
+
+    def __next__(self): # iterator of python3
+        return self.next()
 
 
 class Player:
