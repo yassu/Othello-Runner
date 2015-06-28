@@ -360,17 +360,6 @@ class PlayerTestCase(TestCase):
     def othello_test(self):
         self.player.othello == self.othello
 
-    def get_next_move_test(self):
-        assert(self.player.get_next_move(in_=lambda: '1, 2') == (1, 2))
-
-    @raises(ValueError)
-    def get_next_move_test2(self):
-        self.player.get_next_move(in_=lambda: 'ab, def')
-
-    @raises(ValueError)
-    def get_next_move_test3(self):
-        self.player.get_next_move(in_=lambda: 'abcdef')
-
     def puttable_test(self):
         assert(self.player.puttable((2, 3)) is True)
 
@@ -506,6 +495,23 @@ class PlayerTestCase(TestCase):
             for j in range(7):
                 self.othello._mat[i][j] = WHITE
         assert(self.player.lost() is True)
+
+class HumanPlayerTestCase(TestCase):
+    def setUp(self):
+        self.othello = Othello()
+        self.player = Player('user', self.othello, BLACK)
+
+    def get_next_move_test(self):
+        assert(self.player.get_next_move(in_=lambda: '1, 2') == (1, 2))
+
+    @raises(ValueError)
+    def get_next_move_test2(self):
+        self.player.get_next_move(in_=lambda: 'ab, def')
+
+    @raises(ValueError)
+    def get_next_move_test3(self):
+        self.player.get_next_move(in_=lambda: 'abcdef')
+
 
 
 def s_ind_to_ind_test():

@@ -416,11 +416,6 @@ class Player:
     def othello(self):
         return self._othello
 
-    def get_next_move(self, in_=input):
-        print('{} input:'.format(self.name))
-        ind = s_ind_to_ind(in_())
-        return ind
-
     def puttable(self, ind):
         return self._othello.puttable(ind, self.color)
 
@@ -448,6 +443,12 @@ class Player:
             othello.count(self.color) < round(
                 othello.size[0] * othello.size[1] // 2)
 
+class HumanPlayer(Player):
+
+    def get_next_move(self, _in=input):
+        print('{} input:'.format(self.name))
+        ind = s_ind_to_ind(in_())
+        return ind
 
 def s_ind_to_ind(s_ind):
     s_ind = s_ind.replace(' ', '')
