@@ -465,6 +465,7 @@ class HumanPlayer(Player):
 class RandomPutPlayer(Player):
 
     def get_next_move(self, _in=input):
+        ind = random_choice(list(self.puttable_inds()))
         return random_choice(list(self.puttable_inds()))
 
 
@@ -492,11 +493,14 @@ class CuiRunner:
         if color1 == BLACK:
             first_player = HumanPlayer('player1', othello, color1)
             user = first_player
-            second_player = HumanPlayer('player2', othello, color2)
+            second_player = RandomPutPlayer('player2', othello, color2)
         else:
-            first_player = HumanPlayer('enemy', othello, color2)
+            first_player = RandomPutPlayer('enemy', othello, color2)
             second_player = HumanPlayer('user', othello, color1)
             user = second_player
+
+        print(first_player.__class__)
+        print(second_player.__class__)
 
         while not othello.filled():
             print(othello)
