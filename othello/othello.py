@@ -459,7 +459,11 @@ class HumanPlayer(Player):
     def get_next_move(self, _in=input):
         print('{} input:'.format(self.name))
         ind = s_ind_to_ind(_in())
-        return ind
+        if self.puttable(ind):
+            return ind
+        else:
+            print('Illegal Index')
+            return self.get_next_move()
 
 
 class RandomPutPlayer(Player):
